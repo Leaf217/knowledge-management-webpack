@@ -1,3 +1,3 @@
 
-const greeter = require('./Greeter.js');
-document.querySelector('#hello').appendChild(greeter());
+import * as data from '../server/mock.js';
+console.log(data.getData());
