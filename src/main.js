@@ -1,7 +1,5 @@
 
-// import * as data from '../server/mock.js';
-// console.log(data.getData());
+import {getData} from "./data/dao";
 
-import {data} from "./data/dao";
-
-console.log(data);
+console.log(getData.getDataList());
+console.log(getData.getKnowledgeById(1));

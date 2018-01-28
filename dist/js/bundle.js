@@ -74,23 +74,54 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // import * as data from '../server/mock.js';
 // console.log(data.getData());
 
+// import {getDataList} from "./data/dao";
 
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* data */]);
+console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList());
+console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById(1));
+
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return data; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getData; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__konwledgeData__ = __webpack_require__(2);
 
 
-let data = function () {
-    return __WEBPACK_IMPORTED_MODULE_0__konwledgeData__["a" /* knowledgeData */];
-};
+// export let data = function () {
+//     console.log(knowledgeData());
+// };
+let getData = new class {
+    constructor(data) {
+        this.dataList = data;
+    }
 
+
+    getDataList() {
+        return new Promise((resolve, reject) => {
+                resolve(this.dataList);
+            });
+    }
+
+
+    getKnowledgeById(id) {
+        return this.getDataList()
+            .then(
+                data => {
+                    let knowledge;
+                    data.forEach(value => {
+                    if (value.get("id") === id) {
+                        knowledge = value;
+                    }
+                    return knowledge;
+                });
+            });
+    }
+}(Object(__WEBPACK_IMPORTED_MODULE_0__konwledgeData__["a" /* knowledgeData */])());
+
+// export let getDataList = getData.getDataList();
 
 
 /***/ }),
@@ -99,10 +130,11 @@ let data = function () {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = knowledgeData;
+
 function knowledgeData() {
     let knowledgeData =[];
 
-    let knowledgeList = [
+    let initialKnowledge = [
         [
             ["id", 1],
             ["title", "关于float的那些事儿"],
@@ -130,7 +162,7 @@ function knowledgeData() {
         ]
     ];
 
-    for (let knowledge of knowledgeList) {
+    for (let knowledge of initialKnowledge) {
         knowledgeData.push(new Map(knowledge));
     }
 

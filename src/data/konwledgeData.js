@@ -1,7 +1,8 @@
+
 export function knowledgeData() {
     let knowledgeData =[];
 
-    let knowledgeList = [
+    let initialKnowledge = [
         [
             ["id", 1],
             ["title", "关于float的那些事儿"],
@@ -29,7 +30,7 @@ export function knowledgeData() {
         ]
     ];
 
-    for (let knowledge of knowledgeList) {
+    for (let knowledge of initialKnowledge) {
         knowledgeData.push(new Map(knowledge));
     }
 
