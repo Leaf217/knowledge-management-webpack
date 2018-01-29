@@ -71,14 +71,11 @@
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_dao__ = __webpack_require__(1);
 
-// import * as data from '../server/mock.js';
-// console.log(data.getData());
-
-// import {getDataList} from "./data/dao";
 
 
 console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList());
 console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById(1));
+console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge('1'));
 
 
 /***/ }),
@@ -90,38 +87,69 @@ console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowle
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__konwledgeData__ = __webpack_require__(2);
 
 
-// export let data = function () {
-//     console.log(knowledgeData());
-// };
 let getData = new class {
     constructor(data) {
         this.dataList = data;
     }
 
-
+    //获取整个知识列表，一个数组包含多个Map，每个Map是一个konwledge
     getDataList() {
-        return new Promise((resolve, reject) => {
-                resolve(this.dataList);
-            });
+        return this.dataList;
     }
 
-
+    //通过id获取某个knowledge
     getKnowledgeById(id) {
-        return this.getDataList()
-            .then(
-                data => {
-                    let knowledge;
-                    data.forEach(value => {
-                    if (value.get("id") === id) {
-                        knowledge = value;
-                    }
-                    return knowledge;
-                });
-            });
+        // for (let i = 0; i < this.dataList.length;i++) {
+        //     if (this.dataList[i].get("id") === id) {
+        //         return this.dataList[i];
+        //     }
+        // }
+        for (let value of this.dataList) {
+            if (value.get("id") === id) {
+                return value;
+            }
+        }
     }
+
+    //通过input，搜索关于title或者tags的内容
+    searchKnowledge(input) {
+        let matching = [];
+        for (let value of this.dataList) {
+            let comparison = value.get("title") + ' ' + value.get("tags").join(' ');
+            comparison = comparison.toLowerCase();
+            if (~comparison.indexOf(input.toLowerCase())) {
+                matching.push(value);
+            }
+        }
+        return matching;
+    }
+
+
+
+    // getDataList() {
+    //     return new Promise((resolve, reject) => {
+    //             resolve(this.dataList);
+    //         });
+    // }
+
+
+    // getKnowledgeById(id) {
+    //     return this.getDataList()
+    //         .then(
+    //             data => {
+    //                 let knowledge;
+    //                 data.forEach(value => {
+    //                 if (value.get("id") === id) {
+    //                     knowledge = value;
+    //                 }
+    //                 return knowledge;
+    //             });
+    //         });
+    // }
+
+    
 }(Object(__WEBPACK_IMPORTED_MODULE_0__konwledgeData__["a" /* knowledgeData */])());
 
-// export let getDataList = getData.getDataList();
 
 
 /***/ }),
