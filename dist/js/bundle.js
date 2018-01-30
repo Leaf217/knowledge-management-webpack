@@ -69,22 +69,84 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_dao__ = __webpack_require__(1);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__ = __webpack_require__(1);
+
+// import {getData} from "./data/dao";
+
+// console.log(getData.getDataList());
+// console.log(getData.getKnowledgeById(1));
+// console.log(getData.searchKnowledge('1'));
 
 
-
-console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList());
-console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById(1));
-console.log(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge('1'));
-
+console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__["a" /* input */]);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return input; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__ = __webpack_require__(2);
+
+
+// let input = new Promise((resolve, reject) => {
+//     ajax.request({
+//         url: '/getData/id',
+//         args: 1
+//     });
+// });
+// input.then(function () {
+//     return "finished";
+// });
+
+let input = __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({
+    url: '/getData/id',
+    id: 1
+});
+
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ajax; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_dao__ = __webpack_require__(3);
+
+
+let mapping = new Map([
+    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList()],
+    ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById],
+    ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]
+]);
+
+let ajax = new class {
+  constructor(mapping) {
+      this.mapping = mapping;
+  }
+
+  request(option) {
+      return option[arguments[0]];
+      // if(option.args){
+      //     let func = this.mapping.get(option.url);
+      //     return func.call(getData, option.args);
+      // } else{
+      //     return this.mapping.get(option.url);
+      // }
+  }
+}(mapping);
+
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return getData; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__konwledgeData__ = __webpack_require__(2);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__konwledgeData__ = __webpack_require__(4);
 
 
 let getData = new class {
@@ -111,13 +173,13 @@ let getData = new class {
         }
     }
 
-    //通过input，搜索关于title或者tags的内容
+    //通过input，搜索能够匹配title或者tags的knowledge
     searchKnowledge(input) {
         let matching = [];
         for (let value of this.dataList) {
             let comparison = value.get("title") + ' ' + value.get("tags").join(' ');
-            comparison = comparison.toLowerCase();
-            if (~comparison.indexOf(input.toLowerCase())) {
+            // comparison = comparison.toLowerCase();
+            if (~comparison.indexOf(input)) {
                 matching.push(value);
             }
         }
@@ -153,7 +215,7 @@ let getData = new class {
 
 
 /***/ }),
-/* 2 */
+/* 4 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";

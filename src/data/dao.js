@@ -29,8 +29,8 @@ let getData = new class {
         let matching = [];
         for (let value of this.dataList) {
             let comparison = value.get("title") + ' ' + value.get("tags").join(' ');
-            comparison = comparison.toLowerCase();
-            if (~comparison.indexOf(input.toLowerCase())) {
+            // comparison = comparison.toLowerCase();
+            if (~comparison.indexOf(input)) {
                 matching.push(value);
             }
         }

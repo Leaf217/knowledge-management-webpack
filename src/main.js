@@ -1,6 +1,9 @@
 
-import {getData} from "./data/dao";
+// import {getData} from "./data/dao";
 
-console.log(getData.getDataList());
-console.log(getData.getKnowledgeById(1));
-console.log(getData.searchKnowledge('1'));
+// console.log(getData.getDataList());
+// console.log(getData.getKnowledgeById(1));
+// console.log(getData.searchKnowledge('1'));
+import {request} from '../list/js/konwledgeList';
+
+console.log(request);
