@@ -69,40 +69,55 @@
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__ = __webpack_require__(1);
-
-// import {getData} from "./data/dao";
-
-// console.log(getData.getDataList());
-// console.log(getData.getKnowledgeById(1));
-// console.log(getData.searchKnowledge('1'));
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_js_singleton__ = __webpack_require__(1);
 
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__["a" /* request */]);
+
+console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_singleton__["a" /* list */]);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return request; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return list; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__ = __webpack_require__(2);
 
 
-// let request = new Promise((resolve, reject) => {
-//     ajax.request({
-//         url: '/getData/id',
-//         args: 1
-//     });
-// });
-// request.then(function () {
-//     return "finished";
-// });
 
-let request = __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({
-    url: '/getData/id',
-    args: 1
-});
+
+// let ajaxRequest = function(option) {
+//     return new Promise((resolve, reject) => {
+//         resolve(ajax.request(option));
+//     });
+// };
+
+let list = {};
+
+//获取整个知识列表
+function getKnowledgeList() {
+    __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: '/getData/dataList'})
+        .then(function (contents) {
+            list.knowledge = contents;
+        }, function (err) {
+            console.error(err);
+        });
+}
+
+//通过title或者tags进行知识查询
+function searchList(args) {
+    __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: '/getData/search', args: args})
+        .then(function (contents) {
+            list.search = contents;
+        },function (err) {
+            console.error(err);
+        });
+}
+
+getKnowledgeList();
+searchList(1);
+
+
 
 
 
@@ -127,15 +142,11 @@ let ajax = new class {
   }
 
   request(option) {
-      return this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args);
-      // if(option.args){
-      //     let func = this.mapping.get(option.url);
-      //     return func.call(getData, option.args);
-      // }
-      // else{
-      //     return this.mapping.get(option.url);
-      // }
+      return new Promise(((resolve) => {
+          resolve(this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args));
+      }))
   }
+
 }(mapping);
 
 

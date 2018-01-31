@@ -12,15 +12,11 @@ let ajax = new class {
   }
 
   request(option) {
-      return this.mapping.get(option.url).call(getData, option.args);
-      // if(option.args){
-      //     let func = this.mapping.get(option.url);
-      //     return func.call(getData, option.args);
-      // }
-      // else{
-      //     return this.mapping.get(option.url);
-      // }
+      return new Promise(((resolve) => {
+          resolve(this.mapping.get(option.url).call(getData, option.args));
+      }))
   }
+
 }(mapping);
 
 

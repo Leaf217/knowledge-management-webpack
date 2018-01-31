@@ -1,9 +1,4 @@
 
-// import {getData} from "./data/dao";
+import {list} from '../list/js/singleton';
 
-// console.log(getData.getDataList());
-// console.log(getData.getKnowledgeById(1));
-// console.log(getData.searchKnowledge('1'));
-import {request} from '../list/js/konwledgeList';
-
-console.log(request);
+console.log(list);
