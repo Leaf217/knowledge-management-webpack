@@ -60,100 +60,11 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_js_singleton__ = __webpack_require__(1);
-
-
-
-console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_singleton__["a" /* list */]);
-
-/***/ }),
-/* 1 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return list; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__ = __webpack_require__(2);
-
-
-
-
-// let ajaxRequest = function(option) {
-//     return new Promise((resolve, reject) => {
-//         resolve(ajax.request(option));
-//     });
-// };
-
-let list = {};
-
-//获取整个知识列表
-function getKnowledgeList() {
-    __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: '/getData/dataList'})
-        .then(function (contents) {
-            list.knowledge = contents;
-        }, function (err) {
-            console.error(err);
-        });
-}
-
-//通过title或者tags进行知识查询
-function searchList(args) {
-    __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: '/getData/search', args: args})
-        .then(function (contents) {
-            list.search = contents;
-        },function (err) {
-            console.error(err);
-        });
-}
-
-getKnowledgeList();
-searchList(1);
-
-
-
-
-
-/***/ }),
-/* 2 */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ajax; });
-/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_dao__ = __webpack_require__(3);
-
-
-let mapping = new Map([
-    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList],
-    ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById],
-    ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]
-]);
-
-let ajax = new class {
-  constructor(mapping) {
-      this.mapping = mapping;
-  }
-
-  request(option) {
-      return new Promise(((resolve) => {
-          resolve(this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args));
-      }))
-  }
-
-}(mapping);
-
-
-
-
-/***/ }),
-/* 3 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
@@ -223,6 +134,89 @@ let getData = new class {
 
     
 }(Object(__WEBPACK_IMPORTED_MODULE_0__konwledgeData__["a" /* knowledgeData */])());
+
+
+
+/***/ }),
+/* 1 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__list_js_class__ = __webpack_require__(2);
+
+// import {list} from '../list/js/singleton';
+
+// console.log(list);
+
+
+
+
+
+console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_class__["a" /* list */]);
+
+
+/***/ }),
+/* 2 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return list; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__ = __webpack_require__(3);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__src_data_dao__ = __webpack_require__(0);
+
+
+
+let list = {};
+let search = new class {
+    constructor(dataList) {
+        this.dataList = dataList;
+    }
+
+    searchList(query) {
+        __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: '/getData/search', args: query})
+            .then(function (contents) {
+                list.searchList = contents;
+            },function (err) {
+                console.error(err);
+            });
+    }
+}(__WEBPACK_IMPORTED_MODULE_1__src_data_dao__["a" /* getData */].getDataList());
+
+//test
+search.searchList(1);
+
+
+
+/***/ }),
+/* 3 */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ajax; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__data_dao__ = __webpack_require__(0);
+
+
+//url与调用方法的映射关系
+let mapping = new Map([
+    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList],
+    ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById],
+    ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]
+]);
+
+let ajax = new class {
+  constructor(mapping) {
+      this.mapping = mapping;
+  }
+
+  request(option) {
+      return new Promise(((resolve) => {
+          resolve(this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args));
+      }))
+  }
+
+}(mapping);
+
 
 
 

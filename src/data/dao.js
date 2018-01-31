@@ -1,4 +1,4 @@
-import {knowledgeData} from './konwledgeData';
+import {knowledgeData} from "./konwledgeData";
 
 let getData = new class {
     constructor(data) {

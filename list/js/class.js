@@ -1,14 +1,23 @@
-import {ajax} from '../../src/util/ajax';
+import {ajax} from "../../src/util/ajax";
+import {getData} from "../../src/data/dao";
 
-let searchList = new class {
+let list = {};
+let search = new class {
     constructor(dataList) {
-        this.dataList = ajax.request({
-            url: '/getData/dataList'
-        });
+        this.dataList = dataList;
     }
-    search(option) {
-        return this.mapping.get(option.url).call(getData, option.args);
+
+    searchList(query) {
+        ajax.request({url: '/getData/search', args: query})
+            .then(function (contents) {
+                list.searchList = contents;
+            },function (err) {
+                console.error(err);
+            });
     }
-}(ajax.request({
-    url: '/getData/dataList'
-}));
+}(getData.getDataList());
+
+//test
+search.searchList(1);
+
+export {list};

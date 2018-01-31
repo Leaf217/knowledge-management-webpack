@@ -1,5 +1,6 @@
 import {getData} from "../data/dao";
 
+//url与调用方法的映射关系
 let mapping = new Map([
     ["/getData/dataList", getData.getDataList],
     ["/getData/id", getData.getKnowledgeById],
