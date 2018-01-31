@@ -12,7 +12,7 @@ import {ajax} from '../../src/util/ajax';
 
 let request = ajax.request({
     url: '/getData/id',
-    id: 1
+    args: 1
 });
 
 export {request};

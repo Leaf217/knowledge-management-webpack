@@ -78,30 +78,30 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 // console.log(getData.searchKnowledge('1'));
 
 
-console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__["a" /* input */]);
+console.log(__WEBPACK_IMPORTED_MODULE_0__list_js_konwledgeList__["a" /* request */]);
 
 /***/ }),
 /* 1 */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
-/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return input; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return request; });
 /* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__ = __webpack_require__(2);
 
 
-// let input = new Promise((resolve, reject) => {
+// let request = new Promise((resolve, reject) => {
 //     ajax.request({
 //         url: '/getData/id',
 //         args: 1
 //     });
 // });
-// input.then(function () {
+// request.then(function () {
 //     return "finished";
 // });
 
-let input = __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({
+let request = __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({
     url: '/getData/id',
-    id: 1
+    args: 1
 });
 
 
@@ -116,7 +116,7 @@ let input = __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request
 
 
 let mapping = new Map([
-    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList()],
+    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList],
     ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById],
     ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]
 ]);
@@ -127,11 +127,12 @@ let ajax = new class {
   }
 
   request(option) {
-      return option[arguments[0]];
+      return this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args);
       // if(option.args){
       //     let func = this.mapping.get(option.url);
       //     return func.call(getData, option.args);
-      // } else{
+      // }
+      // else{
       //     return this.mapping.get(option.url);
       // }
   }
