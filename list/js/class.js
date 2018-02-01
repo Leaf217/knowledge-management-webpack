@@ -1,5 +1,6 @@
-import {ajax} from "../../src/util/ajax";
 import {getData} from "../../src/data/dao";
+import {ajax} from "../../src/util/ajax";
+
 
 let list = {};
 let search = new class {
