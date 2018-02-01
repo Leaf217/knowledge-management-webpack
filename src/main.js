@@ -8,3 +8,4 @@
 import {list} from "../list/js/class";
 
 console.log(list);
+
