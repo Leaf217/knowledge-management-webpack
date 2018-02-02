@@ -76,40 +76,46 @@ class List {
     constructor(url, args, list) {
         this.url = url;
         this.args = args;
+        this.list = list;
     }
 
     getData() {
         __WEBPACK_IMPORTED_MODULE_0__src_util_ajax__["a" /* ajax */].request({url: this.url, args: this.args})
-            .then(function (contents) {
-                return contents;
+            .then((contents) => {
+                this.list.data = contents;
+                // console.log(contents);
             },function (err) {
                 console.error(err);
             });
     }
 
     // updateData() {
-    //
+    // 未完待续
     // }
 }
 
 class DataList extends List {
-    constructor(url, args) {
-        super(url, args);
+    constructor(url, args, list) {
+        super(url, args, list);
     }
 }
 
 
 class SearchList extends List {
-    constructor(url, args) {
-        super(url, args);
+    constructor(url, args, list) {
+        super(url, args, list);
     }
 }
 
-let dataList = new DataList('/getData/dataList', null);
 
-let aaa = dataList.getData();
 
-console.log(aaa);
+//test
+let obj = {};
+let dataList = new DataList('/getData/dataList', null, obj);
+
+dataList.getData();
+
+console.log(obj["data"]);
 
 
 
