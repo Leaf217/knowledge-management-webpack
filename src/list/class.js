@@ -1,5 +1,5 @@
-import {getData} from "../../src/data/dao";
-import {ajax} from "../../src/util/ajax";
+import {getData} from "../data/dao";
+import {ajax} from "../util/ajax";
 
 
 let list = {};

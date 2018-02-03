@@ -1,4 +1,4 @@
-import {ajax} from "../../src/util/ajax";
+import {ajax} from "../util/ajax";
 
 let list = {};
 

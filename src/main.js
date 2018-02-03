@@ -5,7 +5,7 @@
 
 
 
-import {list} from "../list/js/class";
+import {list} from "./list/class";
 
 console.log(list);
 
