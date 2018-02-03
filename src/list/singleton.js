@@ -25,7 +25,7 @@ function getSearchList(query) {
 
 //test
 getDataList();
-getSearchList(1);
+// getSearchList(1);
 
 //之后进行一系列的处理export
 //view层import，渲染页面
