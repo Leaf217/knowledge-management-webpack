@@ -1,6 +1,11 @@
-import {list} from "./list/singleton";
+import {getDataList} from "./list/singleton";
 
+let list = {};
 
-console.log(list);
-
+getDataList(list)
+    .then(function (contents) {
+        console.log(list.dataList);
+    }, function (err) {
+        console.error(err);
+    });
 

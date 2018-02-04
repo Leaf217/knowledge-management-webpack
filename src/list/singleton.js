@@ -1,20 +1,20 @@
 import {ajax} from "../util/ajax";
 
-let list = {};
 
 //获取整个知识列表
-function getDataList() {
-    ajax.request({url: '/getData/dataList'})
+export function getDataList(list) {
+    return ajax.request({url: '/getData/dataList'})
         .then(function (contents) {
             list.dataList = contents;
+            // console.log(contents);
         }, function (err) {
             console.error(err);
         });
 }
 
 //通过title或者tags进行知识查询
-function getSearchList(query) {
-    ajax.request({url: '/getData/search', args: query})
+export function getSearchList(query, list) {
+    return ajax.request({url: '/getData/search', args: query})
         .then(function (contents) {
             list.searchList = contents;
         },function (err) {
@@ -23,12 +23,5 @@ function getSearchList(query) {
 }
 
 
-//test
-getDataList();
-// getSearchList(1);
 
-//之后进行一系列的处理export
-//view层import，渲染页面
-
-export {list};
 
