@@ -1,6 +1,6 @@
 
 //先从单例中import list
-import {list} from "../list/singleton";
+// import {list} from "../list/singleton";
 
 let listItem = `<div class="card">
                    <p class="title"> 

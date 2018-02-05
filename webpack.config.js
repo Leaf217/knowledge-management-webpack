@@ -1,8 +1,8 @@
 // const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = {
-    entry:  __dirname + "/src/main.js",
+    entry:  "./src/main.js",
 
     devtool: 'eval-source-map',
 
@@ -12,21 +12,17 @@ module.exports = {
         inline: true //实时刷新
     },
 
-    module: {
-        rules: [
-            {
-                test: /(\.jsx|\.js)$/,
-                use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
-            }
-        ]
-    },
-
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ],
+    // module: {
+    //     rules: [
+    //         {
+    //             test: /(\.jsx|\.js)$/,
+    //             use: {
+    //                 loader: "babel-loader"
+    //             },
+    //             exclude: /node_modules/
+    //         }
+    //     ]
+    // },
 
     output: {
         path: __dirname + "/dist/js",
