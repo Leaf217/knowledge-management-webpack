@@ -10,43 +10,47 @@ function generateListItem(knowledge) {
         return  stars;
     }
 
+    let tags = '';
+    function generateTags(knowledge) {
+        for (let tag of knowledge.tags) {
+            if (!(tag.length === 0 || tag.replace(/(^s*)|(s*$)/g, "").length === 0 || isNull(tag))) {
+                tags += `<span class="tag">${tag}</span>`;
+            }
+        }
+    }
 
-    return `<ul class="item">
-                <li class="title">
-                    <h3><a href="" class="tit-url">${knowledge.title}</a></h3>
-                </li>
-               
-                <li class="progress">
-                    <ul>
-                        <li class="name">学习进度：</li>
-                        <li class="value">
-                            <div class="progress-bar"></div>
-                            <span>${knowledge.progress} %</span>
-                        </li>
-                    </ul>
-                </li>
-                
-                <li class="evaluation">
-                    <ul>
-                        <li class="name">知识评价：</li>
-                        <li class="value">${generateStars(knowledge)}</li>
-                    </ul>
-                </li>
-                
-                <li class="notes">
-                    <ul>
-                        <li class="name">学习笔记：</li>
-                        <li class="value">
-                            <p class="notes-con">${knowledge.notes}</p>
-                            <a href="#" class="view-more">view more</a>
-                        </li>
-                    </ul>
-                </li>
-            
-                <li class="tags"></li>
-               
-               <!--<img src="../images/Trash.png" alt="trash" class="trash">-->
-             </ul>`;
+    function isNull(str){
+        if ( str == "" ) return true;
+        let regular = "^[ ]+$";
+        let re = new RegExp(regular);
+        return re.test(str);
+    }
+
+
+    let listItem = `
+            <li class="item">
+                <h3><a href="" class="tit-url">${knowledge.title}</a></h3>
+                <dl>
+                    <dt>学习进度</dt>
+                    <dd>
+                        <span class="progress-bar"></span>
+                        <span>${knowledge.progress} %</span>
+                    </dd>
+                    
+                    <dt>知识评价</dt>
+                    <dd>${generateStars(knowledge)}</dd>
+                    
+                    <dt>学习笔记</dt>
+                    <dd>
+                        <p class="notes-con">${knowledge.notes}</p>
+                        <a href="#" class="view-more">view more</a>
+                    </dd>
+                    
+                    <dt>标签</dt>
+                    <dd>${generateTags(knowledge)}</dd>
+                </dl>
+               <img src="../images/Trash.png" alt="trash" class="trash">
+            </li>`;
 }
 
 
