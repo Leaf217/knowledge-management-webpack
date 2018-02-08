@@ -1,5 +1,5 @@
 
-function generateListItem(knowledge) {
+export function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
     let stars = '';
@@ -27,8 +27,8 @@ function generateListItem(knowledge) {
     }
 
 
-    let listItem = `
-            <li class="item">
+
+    return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge.title}</a></h3>
                 <dl>
                     <dt>学习进度</dt>
