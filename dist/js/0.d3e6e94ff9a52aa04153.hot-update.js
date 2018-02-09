@@ -1,5 +1,12 @@
+webpackHotUpdate(0,{
 
-export function knowledgeData() {
+/***/ "./src/data/konwledgeData.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = knowledgeData;
+
+function knowledgeData() {
     let knowledgeData =[];
 
     let initialKnowledge = [
@@ -39,3 +46,8 @@ export function knowledgeData() {
 
 
 
+
+
+/***/ })
+
+})

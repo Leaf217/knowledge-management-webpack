@@ -1,5 +1,12 @@
+webpackHotUpdate(0,{
 
-export function generateListItem(knowledge) {
+/***/ "./src/view/listItem.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = generateListItem;
+
+function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
     let stars = '';
@@ -13,14 +20,14 @@ export function generateListItem(knowledge) {
     let tags = '';
     function generateTags(knowledge) {
         for (let tag of knowledge.get("tags")) {
-            if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
+            if (!(tag.length === 0 || tag.toString().replace(/(^s*)|(s*$)/g, "").length === 0 || isNull(tag))) {
                 tags += `<span class="tag">${tag}</span>`;
             }
         }
     }
 
     function isNull(str){
-        if ( str === "" ) return true; //完全空
+        if ( str === "" ) return true;
         let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
         let re = new RegExp(regular);
         return re.test(str);
@@ -55,3 +62,8 @@ export function generateListItem(knowledge) {
 
 
 
+
+
+/***/ })
+
+})

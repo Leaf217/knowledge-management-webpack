@@ -1,27 +1,34 @@
+webpackHotUpdate(0,{
 
-export function generateListItem(knowledge) {
+/***/ "./src/view/listItem.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = generateListItem;
+
+function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
-    let stars = '';
-    function generateStars(knowledge) {
-        for (let i = 0;i < knowledge.get("evaluation");i++) {
-             stars += `<img src="../images/Star-1.png" alt="star" class="eva-img">`;
-        }
-        return  stars;
-    }
+    // let stars = '';
+    // function generateStars(knowledge) {
+    //     for (let i = 0;i < knowledge.get("evaluation");i++) {
+    //          stars += `<img src="../images/Star-1.png" alt="star" class="eva-img">`;
+    //     }
+    //     return  stars;
+    // }
 
     let tags = '';
     function generateTags(knowledge) {
         for (let tag of knowledge.get("tags")) {
-            if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
+            if (!(tag.length === 0 || isNull(tag))) {
                 tags += `<span class="tag">${tag}</span>`;
             }
         }
     }
 
     function isNull(str){
-        if ( str === "" ) return true; //完全空
-        let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
+        if ( str == "" ) return true;
+        let regular = "^[ ]+$";
         let re = new RegExp(regular);
         return re.test(str);
     }
@@ -38,7 +45,7 @@ export function generateListItem(knowledge) {
                     </dd>
                     
                     <dt>知识评价</dt>
-                    <dd>${generateStars(knowledge)}</dd>
+                    <dd></dd>
                     
                     <dt>学习笔记</dt>
                     <dd>
@@ -49,9 +56,14 @@ export function generateListItem(knowledge) {
                     <dt>标签</dt>
                     <dd>${generateTags(knowledge)}</dd>
                 </dl>
-               <img src="../images/Trash.png" alt="trash" class="trash">
+               <!--<img src="../images/Trash.png" alt="trash" class="trash">-->
             </li>`;
 }
 
 
 
+
+
+/***/ })
+
+})

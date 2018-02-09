@@ -8,18 +8,14 @@ class List {
     }
 
     getData() {
-        ajax.request({url: this.url, args: this.args})
+        return ajax.request({url: this.url, args: this.args})
             .then((contents) => {
                 this.list.data = contents;
-                // console.log(contents);
             },function (err) {
                 console.error(err);
             });
     }
 
-    // updateData() {
-    // 未完待续
-    // }
 }
 
 class DataList extends List {

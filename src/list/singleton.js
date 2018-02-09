@@ -1,4 +1,5 @@
 import {ajax} from "../util/ajax";
+import {generateListItem} from "../view/listItem";
 
 
 //获取整个知识列表
@@ -23,5 +24,12 @@ export function getSearchList(query, list) {
 }
 
 
-
+export function render(dataList) {
+    //dataList ---array
+    let list = document.createElement('ul');
+    for (let knowledge of dataList) {
+        list.innerHTML += generateListItem(knowledge);
+    }
+    return list;
+}
 

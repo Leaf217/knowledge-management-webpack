@@ -9,13 +9,14 @@ let search = new class {
     }
 
     searchList(query) {
-        ajax.request({url: '/getData/search', args: query})
+        return ajax.request({url: '/getData/search', args: query})
             .then(function (contents) {
                 list.searchList = contents;
             },function (err) {
                 console.error(err);
             });
     }
+
 }(getData.getDataList());
 
 //test
