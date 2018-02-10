@@ -17,20 +17,27 @@ module.exports = {
         new webpack.HotModuleReplacementPlugin()
     ],
 
-    // module: {
-    //     rules: [
-    //         {
-    //             test: /(\.jsx|\.js)$/,
-    //             use: {
-    //                 loader: "babel-loader"
-    //             },
-    //             exclude: /node_modules/
-    //         }
-    //     ]
-    // },
+    module: {
+        rules: [
+            {
+                test: /(\.jsx|\.js)$/,
+                use: {
+                    loader: "babel-loader"
+                },
+                exclude: /node_modules/
+            },
+            {
+                test: /\.(png|svg|jpg|gif)$/,
+                use: [
+                    'file-loader?limit=8192'
+                ]
+            }
+            ]
+    },
 
     output: {
         path: __dirname + "/dist/js",
+        publicPath: "/dist/js",
         filename: "bundle.js"
     },
 };

@@ -1,15 +1,26 @@
-import star from "../images/Star-1.png";
-import trash from "../images/Trash.png";
+webpackHotUpdate(0,{
 
-export function generateListItem(knowledge) {
+/***/ "./src/images/Star-1.png":
+false,
+
+/***/ "./src/images/Trash.png":
+false,
+
+/***/ "./src/view/listItem.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = generateListItem;
+
+function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
+    let stars = '';
     function generateStars(knowledge) {
-        let stars = '';
-        for (let i = 0;i < knowledge.get("evaluation");i++) {
-             stars += `<img src=${star} alt="star" class="eva-img">`;
+        for (let i = 0; i < knowledge.get("evaluation"); i++) {
+            stars += `<img src="../images/Star-1.png" alt="star" class="eva-img">`;
         }
-        return  stars;
+        return stars;
     }
 
     let tags = '';
@@ -21,14 +32,12 @@ export function generateListItem(knowledge) {
         }
     }
 
-    function isNull(str){
-        if ( str === "" ) return true; //完全空
+    function isNull(str) {
+        if (str === "") return true; //完全空
         let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
         let re = new RegExp(regular);
         return re.test(str);
     }
-
-
 
     return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
@@ -51,9 +60,10 @@ export function generateListItem(knowledge) {
                     <dt>标签</dt>
                     <dd>${generateTags(knowledge)}</dd>
                 </dl>
-               <img src=${trash} alt="trash" class="trash">
+               <img src="../images/Trash.png" alt="trash" class="trash">
             </li>`;
 }
 
+/***/ })
 
-
+})

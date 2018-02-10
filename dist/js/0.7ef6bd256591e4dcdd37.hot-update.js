@@ -1,15 +1,29 @@
-import star from "../images/Star-1.png";
-import trash from "../images/Trash.png";
+webpackHotUpdate(0,{
 
-export function generateListItem(knowledge) {
+/***/ "./src/view/listItem.js":
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (immutable) */ __webpack_exports__["a"] = generateListItem;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__images_Star_1_png__ = __webpack_require__("./src/images/Star-1.png");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__images_Star_1_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__images_Star_1_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__images_Trash_png__ = __webpack_require__("./src/images/Trash.png");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__images_Trash_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__images_Trash_png__);
+
+
+
+function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
+    let stars = '';
     function generateStars(knowledge) {
-        let stars = '';
-        for (let i = 0;i < knowledge.get("evaluation");i++) {
-             stars += `<img src=${star} alt="star" class="eva-img">`;
+        for (let i = 0; i < knowledge.get("evaluation"); i++) {
+            let oneStar = new Image();
+            oneStar.src = __WEBPACK_IMPORTED_MODULE_0__images_Star_1_png___default.a;
+            stars += oneStar;
+            // stars += `<img src="" alt="star" class="eva-img">`;
         }
-        return  stars;
+        return stars;
     }
 
     let tags = '';
@@ -21,14 +35,12 @@ export function generateListItem(knowledge) {
         }
     }
 
-    function isNull(str){
-        if ( str === "" ) return true; //完全空
+    function isNull(str) {
+        if (str === "") return true; //完全空
         let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
         let re = new RegExp(regular);
         return re.test(str);
     }
-
-
 
     return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
@@ -51,9 +63,10 @@ export function generateListItem(knowledge) {
                     <dt>标签</dt>
                     <dd>${generateTags(knowledge)}</dd>
                 </dl>
-               <img src=${trash} alt="trash" class="trash">
+               <img src=${__WEBPACK_IMPORTED_MODULE_1__images_Trash_png___default.a} alt="trash" class="trash">
             </li>`;
 }
 
+/***/ })
 
-
+})

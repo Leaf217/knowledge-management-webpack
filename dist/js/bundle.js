@@ -61,7 +61,7 @@
 /******/ 	
 /******/ 	
 /******/ 	var hotApplyOnUpdate = true;
-/******/ 	var hotCurrentHash = "640a2d690108cc5cf7d0"; // eslint-disable-line no-unused-vars
+/******/ 	var hotCurrentHash = "6eea40fafeabc546efbc"; // eslint-disable-line no-unused-vars
 /******/ 	var hotRequestTimeout = 10000;
 /******/ 	var hotCurrentModuleData = {};
 /******/ 	var hotCurrentChildModule; // eslint-disable-line no-unused-vars
@@ -772,8 +772,6 @@ let getData = new class {
         return matching;
     }
 
-
-
     // getDataList() {
     //     return new Promise((resolve, reject) => {
     //             resolve(this.dataList);
@@ -795,7 +793,7 @@ let getData = new class {
     //         });
     // }
 
-    
+
 }(Object(__WEBPACK_IMPORTED_MODULE_0__konwledgeData__["a" /* knowledgeData */])());
 
 
@@ -809,35 +807,9 @@ let getData = new class {
 /* harmony export (immutable) */ __webpack_exports__["a"] = knowledgeData;
 
 function knowledgeData() {
-    let knowledgeData =[];
+    let knowledgeData = [];
 
-    let initialKnowledge = [
-        [
-            ["id", 1],
-            ["title", "关于float的那些事儿"],
-            ["URL", "http://www.w3school.com.cn/cssref/pr_class_float.asp"],
-            ["progress", 100],
-            ["evaluation", 3],
-            ["notes", "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿"],
-            ["tags", ["1", "2", "3"]]
-        ], [
-            ["id", 2],
-            ["title", "position知多少"],
-            ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"],
-            ["progress", 75],
-            ["evaluation", 4],
-            ["notes", "position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少"],
-            ["tags", ["1", "2"]]
-        ], [
-            ["id", 3],
-            ["title", "1211gfdhfnndhdfhdfgfd"],
-            ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"],
-            ["progress", 66],
-            ["evaluation", 2],
-            ["notes", "gfgitiongdfgfdh42356576654435u6uyuydhfjyrdjfjyrdhhvjtdyrdhhmvjdhhmvhthhgchvjyhmhvjyhdgmhvhyedtjfhjyyedtjykkfuuysjx"],
-            ["tags", ["2", "3"]]
-        ]
-    ];
+    let initialKnowledge = [[["id", 1], ["title", "关于float的那些事儿"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_float.asp"], ["progress", 100], ["evaluation", 3], ["notes", "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿"], ["tags", ["1", "2", "3"]]], [["id", 2], ["title", "position知多少"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"], ["progress", 75], ["evaluation", 4], ["notes", "position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少"], ["tags", ["1", "2"]]], [["id", 3], ["title", "1211gfdhfnndhdfhdfgfd"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"], ["progress", 66], ["evaluation", 2], ["notes", "gfgitiongdfgfdh42356576654435u6uyuydhfjyrdjfjyrdhhvjtdyrdhhmvjdhhmvhthhgchvjyhmhvjyhdgmhvhyedtjfhjyyedtjykkfuuysjx"], ["tags", ["2", "3"]]]];
 
     for (let knowledge of initialKnowledge) {
         knowledgeData.push(new Map(knowledge));
@@ -846,9 +818,19 @@ function knowledgeData() {
     return knowledgeData;
 }
 
+/***/ }),
 
+/***/ "./src/images/Star-1.png":
+/***/ (function(module, exports, __webpack_require__) {
 
+module.exports = __webpack_require__.p + "19f5c5d38301fa9bcb831ab3d027d0d4.png";
 
+/***/ }),
+
+/***/ "./src/images/Trash.png":
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__.p + "34525caf78a447663e194e3e720f89f7.png";
 
 /***/ }),
 
@@ -864,28 +846,24 @@ function knowledgeData() {
 
 
 
-
 //获取整个知识列表
 function getDataList(list) {
-    return __WEBPACK_IMPORTED_MODULE_0__util_ajax__["a" /* ajax */].request({url: '/getData/dataList'})
-        .then(function (contents) {
-            list.dataList = contents;
-            // console.log(contents);
-        }, function (err) {
-            console.error(err);
-        });
+    return __WEBPACK_IMPORTED_MODULE_0__util_ajax__["a" /* ajax */].request({ url: '/getData/dataList' }).then(function (contents) {
+        list.dataList = contents;
+        // console.log(contents);
+    }, function (err) {
+        console.error(err);
+    });
 }
 
 //通过title或者tags进行知识查询
 function getSearchList(query, list) {
-    return __WEBPACK_IMPORTED_MODULE_0__util_ajax__["a" /* ajax */].request({url: '/getData/search', args: query})
-        .then(function (contents) {
-            list.searchList = contents;
-        },function (err) {
-            console.error(err);
-        });
+    return __WEBPACK_IMPORTED_MODULE_0__util_ajax__["a" /* ajax */].request({ url: '/getData/search', args: query }).then(function (contents) {
+        list.searchList = contents;
+    }, function (err) {
+        console.error(err);
+    });
 }
-
 
 function render(dataList) {
     //dataList ---array
@@ -895,8 +873,6 @@ function render(dataList) {
     }
     return list;
 }
-
-
 
 /***/ }),
 
@@ -910,18 +886,15 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 let list = {};
 
-Object(__WEBPACK_IMPORTED_MODULE_0__list_singleton__["a" /* getDataList */])(list)
-    .then(function (contents) {
-        // for (let a of list.dataList) {
-        //     console.log(a.get("tags"));
-        // }
-        Object(__WEBPACK_IMPORTED_MODULE_0__list_singleton__["b" /* render */])(list.dataList);
-        // console.log(list.dataList);
-    }, function (err) {
-        console.error(err);
-    });
-
-
+Object(__WEBPACK_IMPORTED_MODULE_0__list_singleton__["a" /* getDataList */])(list).then(function (contents) {
+    // for (let a of list.dataList) {
+    //     console.log(a.get("tags"));
+    // }
+    Object(__WEBPACK_IMPORTED_MODULE_0__list_singleton__["b" /* render */])(list.dataList);
+    // console.log(list.dataList);
+}, function (err) {
+    console.error(err);
+});
 
 /***/ }),
 
@@ -934,25 +907,20 @@ Object(__WEBPACK_IMPORTED_MODULE_0__list_singleton__["a" /* getDataList */])(lis
 
 
 //url与调用方法的映射关系
-let mapping = new Map([
-    ["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList],
-    ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById],
-    ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]
-]);
+let mapping = new Map([["/getData/dataList", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getDataList], ["/getData/id", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].getKnowledgeById], ["/getData/search", __WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */].searchKnowledge]]);
 
 let ajax = new class {
-  constructor(mapping) {
-      this.mapping = mapping;
-  }
+    constructor(mapping) {
+        this.mapping = mapping;
+    }
 
-  request(option) {
-      return new Promise(((resolve) => {
-          resolve(this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args));
-      }))
-  }
+    request(option) {
+        return new Promise(resolve => {
+            resolve(this.mapping.get(option.url).call(__WEBPACK_IMPORTED_MODULE_0__data_dao__["a" /* getData */], option.args));
+        });
+    }
 
 }(mapping);
-
 
 
 
@@ -963,16 +931,22 @@ let ajax = new class {
 
 "use strict";
 /* harmony export (immutable) */ __webpack_exports__["a"] = generateListItem;
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__images_Star_1_png__ = __webpack_require__("./src/images/Star-1.png");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__images_Star_1_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_0__images_Star_1_png__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__images_Trash_png__ = __webpack_require__("./src/images/Trash.png");
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__images_Trash_png___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_1__images_Trash_png__);
+
+
 
 function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
-    let stars = '';
     function generateStars(knowledge) {
-        for (let i = 0;i < knowledge.get("evaluation");i++) {
-             stars += `<img src="../images/Star-1.png" alt="star" class="eva-img">`;
+        let stars = '';
+        for (let i = 0; i < knowledge.get("evaluation"); i++) {
+            stars += `<img src=${__WEBPACK_IMPORTED_MODULE_0__images_Star_1_png___default.a} alt="star" class="eva-img">`;
         }
-        return  stars;
+        return stars;
     }
 
     let tags = '';
@@ -984,14 +958,12 @@ function generateListItem(knowledge) {
         }
     }
 
-    function isNull(str){
-        if ( str === "" ) return true; //完全空
+    function isNull(str) {
+        if (str === "") return true; //完全空
         let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
         let re = new RegExp(regular);
         return re.test(str);
     }
-
-
 
     return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
@@ -1014,13 +986,9 @@ function generateListItem(knowledge) {
                     <dt>标签</dt>
                     <dd>${generateTags(knowledge)}</dd>
                 </dl>
-               <img src="../images/Trash.png" alt="trash" class="trash">
+               <img src=${__WEBPACK_IMPORTED_MODULE_1__images_Trash_png___default.a} alt="trash" class="trash">
             </li>`;
 }
-
-
-
-
 
 /***/ })
 
