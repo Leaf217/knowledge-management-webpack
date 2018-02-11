@@ -1,43 +1,37 @@
 // const path = require('path');
-const webpack = require('webpack');
+// const webpack = require('webpack');
 
 module.exports = {
     entry:  "./src/main.js",
 
-    // devtool: 'inline-source-map',
-
-    devServer: {
-        contentBase: "./dist", //本地服务器所加载的页面所在的目录
-        // historyApiFallback: true, //不跳转
-        // inline: true //实时刷新
-        hot: true
+    output: {
+        path: __dirname + "/dist/js",
+        filename: "bundle.js"
     },
-    plugins: [
-        new webpack.NamedModulesPlugin(),
-        new webpack.HotModuleReplacementPlugin()
-    ],
 
     module: {
         rules: [
             {
-                test: /(\.jsx|\.js)$/,
+                test: /\.js$/,
+                exclude: /(node_modules|bower_components)/,
                 use: {
-                    loader: "babel-loader"
-                },
-                exclude: /node_modules/
+                    loader: 'babel-loader',
+                    options: {
+                        presets: ['@babel/preset-env']
+                    }
+                }
             },
             {
                 test: /\.(png|svg|jpg|gif)$/,
-                use: [
-                    'file-loader?limit=8192'
-                ]
+                use: [{
+                    loader: "file-loader",
+                    options: {
+                        outputPath: "../images/",//图片输出路径，dist/images,当前目录是在dist/js
+                        publicPath: 'dist/', //如果不加这个，在打包的过程中，会直接在本项目的根目录下寻找images文件夹，404 not found
+                    }
+                }]
+
             }
             ]
-    },
-
-    output: {
-        path: __dirname + "/dist/js",
-        publicPath: "/dist/js",
-        filename: "bundle.js"
-    },
+    }
 };

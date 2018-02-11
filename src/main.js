@@ -1,5 +1,7 @@
 import {getDataList, render} from "./list/singleton";
+// import {star} from "./view/listItem";
 
+// console.log(star);
 let list = {};
 
 getDataList(list)

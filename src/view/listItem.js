@@ -1,6 +1,8 @@
 import star from "../images/Star-1.png";
 import trash from "../images/Trash.png";
 
+// export {star};
+
 export function generateListItem(knowledge) {
 
     //觉得这个循环应该写在listItem里，但又没想好怎么写
@@ -12,8 +14,8 @@ export function generateListItem(knowledge) {
         return  stars;
     }
 
-    let tags = '';
     function generateTags(knowledge) {
+        let tags = '';
         for (let tag of knowledge.get("tags")) {
             if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
                 tags += `<span class="tag">${tag}</span>`;
@@ -51,7 +53,7 @@ export function generateListItem(knowledge) {
                     <dt>标签</dt>
                     <dd>${generateTags(knowledge)}</dd>
                 </dl>
-               <img src=${trash} alt="trash" class="trash">
+                <img src=${trash} alt="trash" class="trash">
             </li>`;
 }
 
