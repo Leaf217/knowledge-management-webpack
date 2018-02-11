@@ -30,6 +30,6 @@ export function render(dataList) {
     for (let knowledge of dataList) {
         list.innerHTML += generateListItem(knowledge);
     }
-    return list;
+    document.getElementsByTagName('body')[0].appendChild(list);
 }
 

@@ -76,10 +76,7 @@ var _singleton = __webpack_require__(1);
 // console.log(star);
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
-  // for (let a of list.dataList) {
-  //     console.log(a.get("tags"));
-  // }
-  (0, _singleton.render)(list.dataList); // console.log(list.dataList);
+  (0, _singleton.render)(list.dataList);
 }, function (err) {
   console.error(err);
 });
@@ -152,7 +149,7 @@ function render(dataList) {
     }
   }
 
-  return list;
+  document.getElementsByTagName('body')[0].appendChild(list);
 }
 
 /***/ }),
@@ -377,7 +374,8 @@ function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { de
 
 // export {star};
 function generateListItem(knowledge) {
-  //觉得这个循环应该写在listItem里，但又没想好怎么写
+  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
+
   function generateStars(knowledge) {
     var stars = '';
 
@@ -416,7 +414,10 @@ function generateListItem(knowledge) {
         }
       }
     }
-  }
+
+    return tags;
+  } // console.log(knowledge.get("tags"));
+
 
   function isNull(str) {
     if (str === "") return true; //完全空
@@ -426,8 +427,6 @@ function generateListItem(knowledge) {
     var re = new RegExp(regular);
     return re.test(str);
   }
-
-  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
 }
 
 /***/ }),
