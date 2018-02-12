@@ -1,7 +1,6 @@
 import star from "../images/Star-1.png";
 import trash from "../images/Trash.png";
 
-// export {star};
 
 export function generateListItem(knowledge) {
 
@@ -29,35 +28,36 @@ export function generateListItem(knowledge) {
                 <img src=${trash} alt="trash" class="trash">
             </li>`;
 
-    function generateStars(knowledge) {
-        let stars = '';
-        for (let i = 0;i < knowledge.get("evaluation");i++) {
-            stars += `<img src=${star} alt="star" class="eva-img">`;
-        }
-        return  stars;
-    }
 
-    function generateTags(knowledge) {
-        let tags = '';
-
-            for (let tag of knowledge.get("tags")) {
-                if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
-                    tags += `<span class="tag">${tag}</span>`;
-                }
-            }
-
-        return tags;
-    }
-        // console.log(knowledge.get("tags"));
-
-
-    function isNull(str){
-        if ( str === "" ) return true; //完全空
-        let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
-        let re = new RegExp(regular);
-        return re.test(str);
-    }
 }
 
+function generateStars(knowledge) {
+    let stars = '';
+    for (let i = 0;i < knowledge.get("evaluation");i++) {
+        stars += `<img src=${star} alt="star" class="eva-img">`;
+    }
+    return  stars;
+}
+
+
+function generateTags(knowledge) {
+    let tags = '';
+
+    for (let tag of knowledge.get("tags")) {
+        if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
+            tags += `<span class="tag">${tag}</span>`;
+        }
+    }
+
+    return tags;
+}
+
+
+function isNull(str){
+    if ( str === "" ) return true; //完全空
+    let regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
+    let re = new RegExp(regular);
+    return re.test(str);
+}
 
 
