@@ -72,11 +72,15 @@
 
 var _singleton = __webpack_require__(1);
 
-// import {star} from "./view/listItem";
-// console.log(star);
+var _renderHeader = __webpack_require__(8);
+
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
-  (0, _singleton.render)(list.dataList);
+  (0, _renderHeader.renderHeader)();
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _singleton.renderList)(list);
 }, function (err) {
   console.error(err);
 });
@@ -93,12 +97,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
-exports.render = render;
+exports.renderList = renderList;
 
 var _ajax = __webpack_require__(2);
 
 var _listItem = __webpack_require__(5);
 
+//写的比较全
 //获取整个知识列表
 function getDataList(list) {
   return _ajax.ajax.request({
@@ -120,9 +125,10 @@ function getSearchList(query, list) {
   }, function (err) {
     console.error(err);
   });
-}
+} //渲染列表
 
-function render(dataList) {
+
+function renderList(dataList) {
   //dataList ---array
   var list = document.createElement('ul');
   var _iteratorNormalCompletion = true;
@@ -149,7 +155,7 @@ function render(dataList) {
     }
   }
 
-  document.getElementsByTagName('body')[0].appendChild(list);
+  document.body.appendChild(list);
 }
 
 /***/ }),
@@ -372,61 +378,59 @@ var _Trash = _interopRequireDefault(__webpack_require__(7));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
-// export {star};
 function generateListItem(knowledge) {
   return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
+}
 
-  function generateStars(knowledge) {
-    var stars = '';
+function generateStars(knowledge) {
+  var stars = '';
 
-    for (var i = 0; i < knowledge.get("evaluation"); i++) {
-      stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
-    }
-
-    return stars;
+  for (var i = 0; i < knowledge.get("evaluation"); i++) {
+    stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
   }
 
-  function generateTags(knowledge) {
-    var tags = '';
-    var _iteratorNormalCompletion = true;
-    var _didIteratorError = false;
-    var _iteratorError = undefined;
+  return stars;
+}
 
+function generateTags(knowledge) {
+  var tags = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = knowledge.get("tags")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _tag = _step.value;
+
+      if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
+        tags += "<span class=\"tag\">".concat(_tag, "</span>");
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
     try {
-      for (var _iterator = knowledge.get("tags")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-        var _tag = _step.value;
-
-        if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
-          tags += "<span class=\"tag\">".concat(_tag, "</span>");
-        }
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
       }
-    } catch (err) {
-      _didIteratorError = true;
-      _iteratorError = err;
     } finally {
-      try {
-        if (!_iteratorNormalCompletion && _iterator.return != null) {
-          _iterator.return();
-        }
-      } finally {
-        if (_didIteratorError) {
-          throw _iteratorError;
-        }
+      if (_didIteratorError) {
+        throw _iteratorError;
       }
     }
-
-    return tags;
-  } // console.log(knowledge.get("tags"));
-
-
-  function isNull(str) {
-    if (str === "") return true; //完全空
-
-    var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
-
-    var re = new RegExp(regular);
-    return re.test(str);
   }
+
+  return tags;
+}
+
+function isNull(str) {
+  if (str === "") return true; //完全空
+
+  var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
+
+  var re = new RegExp(regular);
+  return re.test(str);
 }
 
 /***/ }),
@@ -440,6 +444,52 @@ module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
 /***/ (function(module, exports) {
 
 module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderHeader = renderHeader;
+
+var _header = __webpack_require__(9);
+
+function renderHeader() {
+  var header = document.createElement('header');
+  header.innerHTML = (0, _header.generateHeader)();
+  document.body.appendChild(header);
+}
+
+/***/ }),
+/* 9 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateHeader = generateHeader;
+
+var _Menu = _interopRequireDefault(__webpack_require__(10));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateHeader() {
+  return "<img src=".concat(_Menu.default, " alt=\"Menu\">\n            <input type=\"text\" placeholder=\"Knowledge keywords/Tags\" id=\"search-box\">");
+}
+
+/***/ }),
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
 
 /***/ })
 /******/ ]);
