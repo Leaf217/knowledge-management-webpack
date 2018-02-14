@@ -74,13 +74,19 @@ var _singleton = __webpack_require__(1);
 
 var _renderHeader = __webpack_require__(8);
 
+var _renderFooter = __webpack_require__(12);
+
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
-  (0, _renderHeader.renderHeader)();
+  (0, _renderHeader.renderHeader)(); //渲染header
 }, function (err) {
   console.error(err);
 }).then(function (contents) {
-  (0, _singleton.renderList)(list);
+  (0, _singleton.renderList)(list.dataList); //渲染列表
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _renderFooter.renderFooter)(); //渲染添加按钮
 }, function (err) {
   console.error(err);
 });
@@ -490,6 +496,53 @@ function generateHeader() {
 /***/ (function(module, exports) {
 
 module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
+
+/***/ }),
+/* 11 */,
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderFooter = renderFooter;
+
+var _footer = __webpack_require__(13);
+
+function renderFooter() {
+  var footer = document.createElement('footer');
+  footer.innerHTML = (0, _footer.generateFooter)();
+  document.body.appendChild(footer);
+}
+
+/***/ }),
+/* 13 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateFooter = generateFooter;
+
+var _Add = _interopRequireDefault(__webpack_require__(14));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateFooter() {
+  return "<img src=".concat(_Add.default, " alt=\"add\">");
+}
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/c20c1c2f8a6eae3484a2d7a040be8d53.png";
 
 /***/ })
 /******/ ]);

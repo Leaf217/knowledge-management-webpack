@@ -1,18 +1,24 @@
 import {getDataList, renderList} from "./list/singleton";
 import {renderHeader} from "./header/renderHeader";
+import {renderFooter} from "./footer/renderFooter";
 
 
 let list = {};
 
 getDataList(list)
     .then(function (contents) {
-        renderHeader();
+        renderHeader(); //渲染header
     }, function (err) {
         console.error(err);
     })
     .then(function (contents) {
-        renderList(list);
+        renderList(list.dataList); //渲染列表
     }, function (err) {
         console.error(err);
-    });
+    })
+    .then(function (contents) {
+        renderFooter(); //渲染添加按钮
+    }, function (err) {
+    console.error(err);
+});
 
