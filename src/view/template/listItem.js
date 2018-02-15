@@ -1,5 +1,5 @@
-import star from "../images/Star-1.png";
-import trash from "../images/Trash.png";
+import star from "../../images/Star-1.png";
+import trash from "../../images/Trash.png";
 
 
 export function generateListItem(knowledge) {

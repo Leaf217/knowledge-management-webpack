@@ -1,6 +1,6 @@
 //写的比较全
 import {ajax} from "../util/ajax";
-import {generateListItem} from "../view/listItem";
+import {generateListItem} from "../view/template/listItem";
 
 
 //获取整个知识列表
@@ -24,13 +24,5 @@ export function getSearchList(query, list) {
         });
 }
 
-//渲染列表
-export function renderList(dataList) {
-    //dataList ---array
-    let list = document.createElement('ul');
-    for (let knowledge of dataList) {
-        list.innerHTML += generateListItem(knowledge);
-    }
-    document.body.appendChild(list);
-}
+
 

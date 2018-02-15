@@ -1,4 +1,4 @@
-import menu from "../images/Menu.png";
+import menu from "../../images/Menu.png";
 
 export function generateHeader() {
     return `<img src=${menu} alt="Menu">

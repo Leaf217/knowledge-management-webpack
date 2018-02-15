@@ -72,9 +72,11 @@
 
 var _singleton = __webpack_require__(1);
 
-var _renderHeader = __webpack_require__(8);
+var _renderList = __webpack_require__(16);
 
-var _renderFooter = __webpack_require__(12);
+var _renderHeader = __webpack_require__(14);
+
+var _renderFooter = __webpack_require__(15);
 
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
@@ -82,7 +84,7 @@ var list = {};
 }, function (err) {
   console.error(err);
 }).then(function (contents) {
-  (0, _singleton.renderList)(list.dataList); //渲染列表
+  (0, _renderList.renderList)(list.dataList); //渲染列表
 }, function (err) {
   console.error(err);
 }).then(function (contents) {
@@ -103,11 +105,10 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
-exports.renderList = renderList;
 
 var _ajax = __webpack_require__(2);
 
-var _listItem = __webpack_require__(5);
+var _listItem = __webpack_require__(17);
 
 //写的比较全
 //获取整个知识列表
@@ -131,37 +132,6 @@ function getSearchList(query, list) {
   }, function (err) {
     console.error(err);
   });
-} //渲染列表
-
-
-function renderList(dataList) {
-  //dataList ---array
-  var list = document.createElement('ul');
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = dataList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _knowledge = _step.value;
-      list.innerHTML += (0, _listItem.generateListItem)(_knowledge);
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  document.body.appendChild(list);
 }
 
 /***/ }),
@@ -367,7 +337,121 @@ function knowledgeData() {
 }
 
 /***/ }),
-/* 5 */
+/* 5 */,
+/* 6 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
+
+/***/ }),
+/* 8 */,
+/* 9 */,
+/* 10 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
+
+/***/ }),
+/* 11 */,
+/* 12 */,
+/* 13 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/c20c1c2f8a6eae3484a2d7a040be8d53.png";
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderHeader = renderHeader;
+
+var _header = __webpack_require__(18);
+
+function renderHeader() {
+  var header = document.createElement('header');
+  header.innerHTML = (0, _header.generateHeader)();
+  document.body.appendChild(header);
+}
+
+/***/ }),
+/* 15 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderFooter = renderFooter;
+
+var _footer = __webpack_require__(19);
+
+function renderFooter() {
+  var footer = document.createElement('footer');
+  footer.innerHTML = (0, _footer.generateFooter)();
+  document.body.appendChild(footer);
+}
+
+/***/ }),
+/* 16 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderList = renderList;
+
+var _listItem = __webpack_require__(17);
+
+//渲染列表
+function renderList(dataList) {
+  //dataList ---array
+  var list = document.createElement('ul');
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = dataList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _knowledge = _step.value;
+      list.innerHTML += (0, _listItem.generateListItem)(_knowledge);
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  document.body.appendChild(list);
+}
+
+/***/ }),
+/* 17 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -440,39 +524,7 @@ function isNull(str) {
 }
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
-
-/***/ }),
-/* 8 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderHeader = renderHeader;
-
-var _header = __webpack_require__(9);
-
-function renderHeader() {
-  var header = document.createElement('header');
-  header.innerHTML = (0, _header.generateHeader)();
-  document.body.appendChild(header);
-}
-
-/***/ }),
-/* 9 */
+/* 18 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -492,34 +544,7 @@ function generateHeader() {
 }
 
 /***/ }),
-/* 10 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
-
-/***/ }),
-/* 11 */,
-/* 12 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderFooter = renderFooter;
-
-var _footer = __webpack_require__(13);
-
-function renderFooter() {
-  var footer = document.createElement('footer');
-  footer.innerHTML = (0, _footer.generateFooter)();
-  document.body.appendChild(footer);
-}
-
-/***/ }),
-/* 13 */
+/* 19 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -530,19 +555,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.generateFooter = generateFooter;
 
-var _Add = _interopRequireDefault(__webpack_require__(14));
+var _Add = _interopRequireDefault(__webpack_require__(13));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function generateFooter() {
   return "<img src=".concat(_Add.default, " alt=\"add\">");
 }
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/c20c1c2f8a6eae3484a2d7a040be8d53.png";
 
 /***/ })
 /******/ ]);

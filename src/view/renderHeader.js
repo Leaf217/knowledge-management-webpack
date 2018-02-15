@@ -1,4 +1,4 @@
-import {generateHeader} from "../view/header";
+import {generateHeader} from "./template/header";
 
 export function renderHeader() {
     let header = document.createElement('header');
