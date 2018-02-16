@@ -2,11 +2,14 @@ import {knowledgeData} from "./konwledgeData";
 
 let getData = new class {
     constructor(data) {
-        this.dataList = data;
+        // JSON.parse(localStorage.getItem("knowledgeData"));
+        this.dataList = JSON.parse(localStorage.getItem("knowledgeData"));
     }
 
-    //获取整个知识列表，一个数组包含多个Map，每个Map是一个konwledge
+    //获取整个知识列表，一个数组包含多个Map，每个Map是一个knowledge
     getDataList() {
+        // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+        console.log(this.dataList);//空
         return this.dataList;
     }
 
@@ -17,6 +20,7 @@ let getData = new class {
         //         return this.dataList[i];
         //     }
         // }
+
         for (let value of this.dataList) {
             if (value.get("id") === id) {
                 return value;

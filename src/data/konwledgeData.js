@@ -34,7 +34,10 @@ export function knowledgeData() {
         knowledgeData.push(new Map(knowledge));
     }
 
-    return knowledgeData;
+
+    localStorage.setItem("knowledgeData", JSON.stringify(knowledgeData));
+
+    // return knowledgeData;
 }
 
 

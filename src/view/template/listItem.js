@@ -4,6 +4,8 @@ import trash from "../../images/Trash.png";
 
 export function generateListItem(knowledge) {
 
+    // let knowledge =
+
     return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
                 <dl>

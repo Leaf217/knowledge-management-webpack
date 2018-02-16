@@ -1,6 +1,5 @@
 //写的比较全
 import {ajax} from "../util/ajax";
-import {generateListItem} from "../view/template/listItem";
 
 
 //获取整个知识列表

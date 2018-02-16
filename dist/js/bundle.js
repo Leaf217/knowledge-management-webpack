@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,13 +70,87 @@
 "use strict";
 
 
-var _singleton = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateListItem = generateListItem;
 
-var _renderList = __webpack_require__(16);
+var _Star = _interopRequireDefault(__webpack_require__(6));
 
-var _renderHeader = __webpack_require__(14);
+var _Trash = _interopRequireDefault(__webpack_require__(7));
 
-var _renderFooter = __webpack_require__(15);
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateListItem(knowledge) {
+  // let knowledge =
+  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
+}
+
+function generateStars(knowledge) {
+  var stars = '';
+
+  for (var i = 0; i < knowledge.get("evaluation"); i++) {
+    stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
+  }
+
+  return stars;
+}
+
+function generateTags(knowledge) {
+  var tags = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = knowledge.get("tags")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _tag = _step.value;
+
+      if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
+        tags += "<span class=\"tag\">".concat(_tag, "</span>");
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return tags;
+}
+
+function isNull(str) {
+  if (str === "") return true; //完全空
+
+  var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
+
+  var re = new RegExp(regular);
+  return re.test(str);
+}
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _singleton = __webpack_require__(2);
+
+var _renderList = __webpack_require__(8);
+
+var _renderHeader = __webpack_require__(9);
+
+var _renderFooter = __webpack_require__(12);
 
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
@@ -94,7 +168,7 @@ var list = {};
 });
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -106,9 +180,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
 
-var _ajax = __webpack_require__(2);
-
-var _listItem = __webpack_require__(17);
+var _ajax = __webpack_require__(3);
 
 //写的比较全
 //获取整个知识列表
@@ -135,7 +207,7 @@ function getSearchList(query, list) {
 }
 
 /***/ }),
-/* 2 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -146,7 +218,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ajax = void 0;
 
-var _dao = __webpack_require__(3);
+var _dao = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -181,7 +253,7 @@ function () {
 exports.ajax = ajax;
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -192,7 +264,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getData = void 0;
 
-var _konwledgeData = __webpack_require__(4);
+var _konwledgeData = __webpack_require__(5);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -206,13 +278,17 @@ function () {
   function _class(data) {
     _classCallCheck(this, _class);
 
-    this.dataList = data;
-  } //获取整个知识列表，一个数组包含多个Map，每个Map是一个konwledge
+    // JSON.parse(localStorage.getItem("knowledgeData"));
+    this.dataList = JSON.parse(localStorage.getItem("knowledgeData"));
+  } //获取整个知识列表，一个数组包含多个Map，每个Map是一个knowledge
 
 
   _createClass(_class, [{
     key: "getDataList",
     value: function getDataList() {
+      // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+      console.log(this.dataList); //空
+
       return this.dataList;
     } //通过id获取某个knowledge
 
@@ -313,7 +389,7 @@ function () {
 exports.getData = getData;
 
 /***/ }),
-/* 4 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -333,11 +409,10 @@ function knowledgeData() {
     knowledgeData.push(new Map(knowledge));
   }
 
-  return knowledgeData;
+  localStorage.setItem("knowledgeData", JSON.stringify(knowledgeData)); // return knowledgeData;
 }
 
 /***/ }),
-/* 5 */,
 /* 6 */
 /***/ (function(module, exports) {
 
@@ -350,63 +425,7 @@ module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
 module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
 
 /***/ }),
-/* 8 */,
-/* 9 */,
-/* 10 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
-
-/***/ }),
-/* 11 */,
-/* 12 */,
-/* 13 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/c20c1c2f8a6eae3484a2d7a040be8d53.png";
-
-/***/ }),
-/* 14 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderHeader = renderHeader;
-
-var _header = __webpack_require__(18);
-
-function renderHeader() {
-  var header = document.createElement('header');
-  header.innerHTML = (0, _header.generateHeader)();
-  document.body.appendChild(header);
-}
-
-/***/ }),
-/* 15 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.renderFooter = renderFooter;
-
-var _footer = __webpack_require__(19);
-
-function renderFooter() {
-  var footer = document.createElement('footer');
-  footer.innerHTML = (0, _footer.generateFooter)();
-  document.body.appendChild(footer);
-}
-
-/***/ }),
-/* 16 */
+/* 8 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -417,12 +436,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderList = renderList;
 
-var _listItem = __webpack_require__(17);
+var _listItem = __webpack_require__(0);
 
 //渲染列表
 function renderList(dataList) {
   //dataList ---array
   var list = document.createElement('ul');
+  console.log(dataList);
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -430,6 +450,7 @@ function renderList(dataList) {
   try {
     for (var _iterator = dataList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _knowledge = _step.value;
+      console.log(_knowledge);
       list.innerHTML += (0, _listItem.generateListItem)(_knowledge);
     }
   } catch (err) {
@@ -451,7 +472,7 @@ function renderList(dataList) {
 }
 
 /***/ }),
-/* 17 */
+/* 9 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -460,71 +481,18 @@ function renderList(dataList) {
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.generateListItem = generateListItem;
+exports.renderHeader = renderHeader;
 
-var _Star = _interopRequireDefault(__webpack_require__(6));
+var _header = __webpack_require__(10);
 
-var _Trash = _interopRequireDefault(__webpack_require__(7));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function generateListItem(knowledge) {
-  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
-}
-
-function generateStars(knowledge) {
-  var stars = '';
-
-  for (var i = 0; i < knowledge.get("evaluation"); i++) {
-    stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
-  }
-
-  return stars;
-}
-
-function generateTags(knowledge) {
-  var tags = '';
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = knowledge.get("tags")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _tag = _step.value;
-
-      if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
-        tags += "<span class=\"tag\">".concat(_tag, "</span>");
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return tags;
-}
-
-function isNull(str) {
-  if (str === "") return true; //完全空
-
-  var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
-
-  var re = new RegExp(regular);
-  return re.test(str);
+function renderHeader() {
+  var header = document.createElement('header');
+  header.innerHTML = (0, _header.generateHeader)();
+  document.body.appendChild(header);
 }
 
 /***/ }),
-/* 18 */
+/* 10 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -535,7 +503,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.generateHeader = generateHeader;
 
-var _Menu = _interopRequireDefault(__webpack_require__(10));
+var _Menu = _interopRequireDefault(__webpack_require__(11));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -544,7 +512,33 @@ function generateHeader() {
 }
 
 /***/ }),
-/* 19 */
+/* 11 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/ffaf32f7b7be03e73ab4c02380d1e0a2.png";
+
+/***/ }),
+/* 12 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.renderFooter = renderFooter;
+
+var _footer = __webpack_require__(13);
+
+function renderFooter() {
+  var footer = document.createElement('footer');
+  footer.innerHTML = (0, _footer.generateFooter)();
+  document.body.appendChild(footer);
+}
+
+/***/ }),
+/* 13 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -555,13 +549,19 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.generateFooter = generateFooter;
 
-var _Add = _interopRequireDefault(__webpack_require__(13));
+var _Add = _interopRequireDefault(__webpack_require__(14));
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function generateFooter() {
   return "<img src=".concat(_Add.default, " alt=\"add\">");
 }
+
+/***/ }),
+/* 14 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/c20c1c2f8a6eae3484a2d7a040be8d53.png";
 
 /***/ })
 /******/ ]);

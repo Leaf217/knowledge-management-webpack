@@ -20,6 +20,6 @@ getDataList(list)
     .then(function (contents) {
         renderFooter(); //渲染添加按钮
     }, function (err) {
-    console.error(err);
+        console.error(err);
 });
 
