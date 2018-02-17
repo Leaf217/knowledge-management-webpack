@@ -4,15 +4,38 @@ import trash from "../../images/Trash.png";
 
 export function generateListItem(knowledge) {
 
-    // let knowledge =
+    // return `<li class="item">
+    //             <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
+    //             <dl>
+    //                 <dt>学习进度</dt>
+    //                 <dd>
+    //                     <span class="progress-bar"></span>
+    //                     <span>${knowledge.get("progress")} %</span>
+    //                 </dd>
+    //
+    //                 <dt>知识评价</dt>
+    //                 <dd>${generateStars(knowledge)}</dd>
+    //
+    //                 <dt>学习笔记</dt>
+    //                 <dd>
+    //                     <p class="notes-con">${knowledge.get("notes")}</p>
+    //                     <a href="#" class="view-more">view more</a>
+    //                 </dd>
+    //
+    //                 <dt>标签</dt>
+    //                 <dd>${generateTags(knowledge)}</dd>
+    //             </dl>
+    //             <img src=${trash} alt="trash" class="trash">
+    //         </li>`;
+
 
     return `<li class="item">
-                <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
+                <h3><a href="" class="tit-url">${knowledge["title"]}</a></h3>
                 <dl>
                     <dt>学习进度</dt>
                     <dd>
                         <span class="progress-bar"></span>
-                        <span>${knowledge.get("progress")} %</span>
+                        <span>${knowledge["progress"]} %</span>
                     </dd>
                     
                     <dt>知识评价</dt>
@@ -20,7 +43,7 @@ export function generateListItem(knowledge) {
                     
                     <dt>学习笔记</dt>
                     <dd>
-                        <p class="notes-con">${knowledge.get("notes")}</p>
+                        <p class="notes-con">${knowledge["notes"]}</p>
                         <a href="#" class="view-more">view more</a>
                     </dd>
                     
@@ -35,7 +58,7 @@ export function generateListItem(knowledge) {
 
 function generateStars(knowledge) {
     let stars = '';
-    for (let i = 0;i < knowledge.get("evaluation");i++) {
+    for (let i = 0;i < knowledge["evaluation"];i++) {
         stars += `<img src=${star} alt="star" class="eva-img">`;
     }
     return  stars;
@@ -45,7 +68,7 @@ function generateStars(knowledge) {
 function generateTags(knowledge) {
     let tags = '';
 
-    for (let tag of knowledge.get("tags")) {
+    for (let tag of knowledge["tags"]) {
         if (!(tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(tag))) {
             tags += `<span class="tag">${tag}</span>`;
         }

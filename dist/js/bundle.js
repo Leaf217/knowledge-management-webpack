@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,83 +70,9 @@
 "use strict";
 
 
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.generateListItem = generateListItem;
+var _singleton = __webpack_require__(1);
 
-var _Star = _interopRequireDefault(__webpack_require__(6));
-
-var _Trash = _interopRequireDefault(__webpack_require__(7));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function generateListItem(knowledge) {
-  // let knowledge =
-  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.get("title"), "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.get("progress"), " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.get("notes"), "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
-}
-
-function generateStars(knowledge) {
-  var stars = '';
-
-  for (var i = 0; i < knowledge.get("evaluation"); i++) {
-    stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
-  }
-
-  return stars;
-}
-
-function generateTags(knowledge) {
-  var tags = '';
-  var _iteratorNormalCompletion = true;
-  var _didIteratorError = false;
-  var _iteratorError = undefined;
-
-  try {
-    for (var _iterator = knowledge.get("tags")[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
-      var _tag = _step.value;
-
-      if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
-        tags += "<span class=\"tag\">".concat(_tag, "</span>");
-      }
-    }
-  } catch (err) {
-    _didIteratorError = true;
-    _iteratorError = err;
-  } finally {
-    try {
-      if (!_iteratorNormalCompletion && _iterator.return != null) {
-        _iterator.return();
-      }
-    } finally {
-      if (_didIteratorError) {
-        throw _iteratorError;
-      }
-    }
-  }
-
-  return tags;
-}
-
-function isNull(str) {
-  if (str === "") return true; //完全空
-
-  var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
-
-  var re = new RegExp(regular);
-  return re.test(str);
-}
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _singleton = __webpack_require__(2);
-
-var _renderList = __webpack_require__(8);
+var _renderList = __webpack_require__(5);
 
 var _renderHeader = __webpack_require__(9);
 
@@ -168,7 +94,7 @@ var list = {};
 });
 
 /***/ }),
-/* 2 */
+/* 1 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -180,7 +106,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
 
-var _ajax = __webpack_require__(3);
+var _ajax = __webpack_require__(2);
 
 //写的比较全
 //获取整个知识列表
@@ -207,7 +133,7 @@ function getSearchList(query, list) {
 }
 
 /***/ }),
-/* 3 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -218,7 +144,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.ajax = void 0;
 
-var _dao = __webpack_require__(4);
+var _dao = __webpack_require__(3);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -253,7 +179,7 @@ function () {
 exports.ajax = ajax;
 
 /***/ }),
-/* 4 */
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -264,7 +190,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getData = void 0;
 
-var _konwledgeData = __webpack_require__(5);
+var _konwledgeData = __webpack_require__(4);
 
 function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
 
@@ -278,6 +204,7 @@ function () {
   function _class(data) {
     _classCallCheck(this, _class);
 
+    // console.log(localStorage.getItem("knowledgeData"));
     // JSON.parse(localStorage.getItem("knowledgeData"));
     this.dataList = JSON.parse(localStorage.getItem("knowledgeData"));
   } //获取整个知识列表，一个数组包含多个Map，每个Map是一个knowledge
@@ -286,9 +213,6 @@ function () {
   _createClass(_class, [{
     key: "getDataList",
     value: function getDataList() {
-      // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
-      console.log(this.dataList); //空
-
       return this.dataList;
     } //通过id获取某个knowledge
 
@@ -389,7 +313,7 @@ function () {
 exports.getData = getData;
 
 /***/ }),
-/* 5 */
+/* 4 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -400,32 +324,69 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.knowledgeData = knowledgeData;
 
+// export function knowledgeData() {
+//     let knowledgeData =[];
+//
+//     let initialKnowledge = [
+//         [
+//             ["id", 1],
+//             ["title", "关于float的那些事儿"],
+//             ["URL", "http://www.w3school.com.cn/cssref/pr_class_float.asp"],
+//             ["progress", 100],
+//             ["evaluation", 3],
+//             ["notes", "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿"],
+//             ["tags", ["1", "2", "3"]]
+//         ], [
+//             ["id", 2],
+//             ["title", "position知多少"],
+//             ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"],
+//             ["progress", 75],
+//             ["evaluation", 4],
+//             ["notes", "position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少"],
+//             ["tags", ["1", "2"]]
+//         ], [
+//             ["id", 3],
+//             ["title", "1211gfdhfnndhdfhdfgfd"],
+//             ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"],
+//             ["progress", 66],
+//             ["evaluation", 2],
+//             ["notes", "gfgitiongdfgfdh42356576654435u6uyuydhfjyrdjfjyrdhhvjtdyrdhhmvjdhhmvhthhgchvjyhmhvjyhdgmhvhyedtjfhjyyedtjykkfuuysjx"],
+//             ["tags", ["2", "3"]]
+//         ]
+//     ];
+//
+//     for (let knowledge of initialKnowledge) {
+//         knowledgeData.push(new Map(knowledge));
+//     }
+//
+//
+//     // localStorage.setItem("knowledgeData", JSON.stringify(knowledgeData));
+//
+//     return knowledgeData;
+// }
 function knowledgeData() {
-  var knowledgeData = [];
-  var initialKnowledge = [[["id", 1], ["title", "关于float的那些事儿"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_float.asp"], ["progress", 100], ["evaluation", 3], ["notes", "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿"], ["tags", ["1", "2", "3"]]], [["id", 2], ["title", "position知多少"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"], ["progress", 75], ["evaluation", 4], ["notes", "position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少"], ["tags", ["1", "2"]]], [["id", 3], ["title", "1211gfdhfnndhdfhdfgfd"], ["URL", "http://www.w3school.com.cn/cssref/pr_class_position.asp"], ["progress", 66], ["evaluation", 2], ["notes", "gfgitiongdfgfdh42356576654435u6uyuydhfjyrdjfjyrdhhvjtdyrdhhmvjdhhmvhthhgchvjyhmhvjyhdgmhvhyedtjfhjyyedtjykkfuuysjx"], ["tags", ["2", "3"]]]];
-
-  for (var _i = 0; _i < initialKnowledge.length; _i++) {
-    var knowledge = initialKnowledge[_i];
-    knowledgeData.push(new Map(knowledge));
-  }
-
-  localStorage.setItem("knowledgeData", JSON.stringify(knowledgeData)); // return knowledgeData;
+  var knowledgeData = [{
+    "id": 0,
+    "title": "关于float的那些事儿",
+    "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+    "progress": 100,
+    "evaluation": 3,
+    "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+    "tags": ['Tag1', 'Tag2', 'Tag3']
+  }, {
+    "id": 1,
+    "title": "position知多少",
+    "URL": "http://www.w3school.com.cn/cssref/pr_class_position.asp",
+    "progress": 75,
+    "evaluation": 4,
+    "notes": "position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少position知多少",
+    "tags": ['Tag1', 'Tag2']
+  }];
+  localStorage.setItem("knowledgeData", JSON.stringify(knowledgeData)); //将JSON对象转化成字符串,用localStorage保存转化好的字符串
 }
 
 /***/ }),
-/* 6 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
-
-/***/ }),
-/* 7 */
-/***/ (function(module, exports) {
-
-module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
-
-/***/ }),
-/* 8 */
+/* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -436,13 +397,13 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.renderList = renderList;
 
-var _listItem = __webpack_require__(0);
+var _listItem = __webpack_require__(6);
 
 //渲染列表
 function renderList(dataList) {
   //dataList ---array
-  var list = document.createElement('ul');
-  console.log(dataList);
+  var list = document.createElement('ul'); // console.log(dataList);
+
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -470,6 +431,114 @@ function renderList(dataList) {
 
   document.body.appendChild(list);
 }
+
+/***/ }),
+/* 6 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.generateListItem = generateListItem;
+
+var _Star = _interopRequireDefault(__webpack_require__(7));
+
+var _Trash = _interopRequireDefault(__webpack_require__(8));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function generateListItem(knowledge) {
+  // return `<li class="item">
+  //             <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
+  //             <dl>
+  //                 <dt>学习进度</dt>
+  //                 <dd>
+  //                     <span class="progress-bar"></span>
+  //                     <span>${knowledge.get("progress")} %</span>
+  //                 </dd>
+  //
+  //                 <dt>知识评价</dt>
+  //                 <dd>${generateStars(knowledge)}</dd>
+  //
+  //                 <dt>学习笔记</dt>
+  //                 <dd>
+  //                     <p class="notes-con">${knowledge.get("notes")}</p>
+  //                     <a href="#" class="view-more">view more</a>
+  //                 </dd>
+  //
+  //                 <dt>标签</dt>
+  //                 <dd>${generateTags(knowledge)}</dd>
+  //             </dl>
+  //             <img src=${trash} alt="trash" class="trash">
+  //         </li>`;
+  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge["title"], "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge["progress"], " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge["notes"], "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
+}
+
+function generateStars(knowledge) {
+  var stars = '';
+
+  for (var i = 0; i < knowledge["evaluation"]; i++) {
+    stars += "<img src=".concat(_Star.default, " alt=\"star\" class=\"eva-img\">");
+  }
+
+  return stars;
+}
+
+function generateTags(knowledge) {
+  var tags = '';
+  var _iteratorNormalCompletion = true;
+  var _didIteratorError = false;
+  var _iteratorError = undefined;
+
+  try {
+    for (var _iterator = knowledge["tags"][Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
+      var _tag = _step.value;
+
+      if (!(_tag.replace(/(^s*)|(s*$)/g, "").length == 0 || isNull(_tag))) {
+        tags += "<span class=\"tag\">".concat(_tag, "</span>");
+      }
+    }
+  } catch (err) {
+    _didIteratorError = true;
+    _iteratorError = err;
+  } finally {
+    try {
+      if (!_iteratorNormalCompletion && _iterator.return != null) {
+        _iterator.return();
+      }
+    } finally {
+      if (_didIteratorError) {
+        throw _iteratorError;
+      }
+    }
+  }
+
+  return tags;
+}
+
+function isNull(str) {
+  if (str === "") return true; //完全空
+
+  var regular = "^[ ]+$"; //^ 起始符，$ 结束符，+ 多个, [ ] 空格
+
+  var re = new RegExp(regular);
+  return re.test(str);
+}
+
+/***/ }),
+/* 7 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/19f5c5d38301fa9bcb831ab3d027d0d4.png";
+
+/***/ }),
+/* 8 */
+/***/ (function(module, exports) {
+
+module.exports = "dist/../images/34525caf78a447663e194e3e720f89f7.png";
 
 /***/ }),
 /* 9 */
