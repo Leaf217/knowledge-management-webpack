@@ -4,6 +4,7 @@ import trash from "../../images/Trash.png";
 
 export function generateListItem(knowledge) {
 
+    //knowledgeData使用Map时，用get得到属性值(下边定义的函数同理)
     // return `<li class="item">
     //             <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
     //             <dl>
@@ -29,6 +30,7 @@ export function generateListItem(knowledge) {
     //         </li>`;
 
 
+    //knowledgeData不使用Map时，用[]得到属性值(下边定义的函数同理)
     return `<li class="item">
                 <h3><a href="" class="tit-url">${knowledge["title"]}</a></h3>
                 <dl>
