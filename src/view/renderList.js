@@ -1,5 +1,5 @@
 //渲染列表
-import {generateListItem} from "./template/listItem";
+import {generateListItem} from "./template/listItem.js";
 
 export function renderList(dataList) {
     //dataList ---array

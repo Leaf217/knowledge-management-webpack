@@ -1,4 +1,4 @@
-import {getData} from "../data/dao";
+import {getData} from "../data/dao.js";
 
 //url与调用方法的映射关系
 let mapping = new Map([

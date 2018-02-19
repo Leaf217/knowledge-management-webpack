@@ -1,7 +1,7 @@
-import {getDataList} from "./list/singleton";
-import {renderList} from "./view/renderList";
-import {renderHeader} from "./view/renderHeader";
-import {renderFooter} from "./view/renderFooter";
+import {getDataList} from "./list/singleton.js";
+import {renderList} from "./view/renderList.js";
+import {renderHeader} from "./view/renderHeader.js";
+import {renderFooter} from "./view/renderFooter.js";
 
 
 let list = {};

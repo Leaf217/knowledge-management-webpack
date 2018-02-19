@@ -1,5 +1,5 @@
 //写的比较全
-import {ajax} from "../util/ajax";
+import {ajax} from "../util/ajax.js";
 
 
 //获取整个知识列表
