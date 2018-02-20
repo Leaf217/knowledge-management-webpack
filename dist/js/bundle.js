@@ -78,6 +78,8 @@ var _renderHeader = __webpack_require__(9);
 
 var _renderFooter = __webpack_require__(12);
 
+var _dao = __webpack_require__(3);
+
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
   (0, _renderHeader.renderHeader)(); //渲染header
@@ -91,6 +93,16 @@ var list = {};
   (0, _renderFooter.renderFooter)(); //渲染添加按钮
 }, function (err) {
   console.error(err);
+});
+
+_dao.getData.addData({
+  "id": 0,
+  "title": "关------",
+  "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+  "progress": 100,
+  "evaluation": 3,
+  "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+  "tags": ['Tag1', 'Tag2', 'Tag3']
 });
 
 /***/ }),
@@ -201,7 +213,7 @@ function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _d
 var getData = new (
 /*#__PURE__*/
 function () {
-  function _class(data) {
+  function _class() {
     _classCallCheck(this, _class);
 
     // console.log(localStorage.getItem("knowledgeData"));
@@ -287,25 +299,15 @@ function () {
       }
 
       return matching;
-    } // getDataList() {
-    //     return new Promise((resolve, reject) => {
-    //             resolve(this.dataList);
-    //         });
-    // }
-    // getKnowledgeById(id) {
-    //     return this.getDataList()
-    //         .then(
-    //             data => {
-    //                 let knowledge;
-    //                 data.forEach(value => {
-    //                 if (value.get("id") === id) {
-    //                     knowledge = value;
-    //                 }
-    //                 return knowledge;
-    //             });
-    //         });
-    // }
-
+    }
+  }, {
+    key: "addData",
+    value: function addData(data) {
+      var initialData = this.dataList;
+      initialData.push(data);
+      localStorage.setItem("knowledgeData", JSON.stringify(initialData));
+      console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+    }
   }]);
 
   return _class;
@@ -402,8 +404,7 @@ var _listItem = __webpack_require__(6);
 //渲染列表
 function renderList(dataList) {
   //dataList ---array
-  var list = document.createElement('ul'); // console.log(dataList);
-
+  var list = document.createElement('ul');
   var _iteratorNormalCompletion = true;
   var _didIteratorError = false;
   var _iteratorError = undefined;
@@ -411,7 +412,6 @@ function renderList(dataList) {
   try {
     for (var _iterator = dataList[Symbol.iterator](), _step; !(_iteratorNormalCompletion = (_step = _iterator.next()).done); _iteratorNormalCompletion = true) {
       var _knowledge = _step.value;
-      console.log(_knowledge);
       list.innerHTML += (0, _listItem.generateListItem)(_knowledge);
     }
   } catch (err) {
@@ -451,6 +451,7 @@ var _Trash = _interopRequireDefault(__webpack_require__(8));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function generateListItem(knowledge) {
+  //knowledgeData使用Map时，用get得到属性值(下边定义的函数同理)
   // return `<li class="item">
   //             <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
   //             <dl>
@@ -474,6 +475,7 @@ function generateListItem(knowledge) {
   //             </dl>
   //             <img src=${trash} alt="trash" class="trash">
   //         </li>`;
+  //knowledgeData不使用Map时，用[]得到属性值(下边定义的函数同理)
   return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge["title"], "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge["progress"], " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge["notes"], "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
 }
 

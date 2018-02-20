@@ -3,6 +3,7 @@ import {renderList} from "./view/renderList.js";
 import {renderHeader} from "./view/renderHeader.js";
 import {renderFooter} from "./view/renderFooter.js";
 
+import {getData} from "./data/dao.js"
 
 let list = {};
 
@@ -21,5 +22,15 @@ getDataList(list)
         renderFooter(); //渲染添加按钮
     }, function (err) {
         console.error(err);
+});
+
+getData.addData({
+    "id": 0,
+    "title": "关------",
+    "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+    "progress": 100,
+    "evaluation": 3,
+    "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+    "tags": ['Tag1', 'Tag2', 'Tag3']
 });
 

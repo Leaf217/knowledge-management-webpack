@@ -1,7 +1,7 @@
 import {knowledgeData} from "./konwledgeData.js";
 
 let getData = new class {
-    constructor(data) {
+    constructor() {
         // console.log(localStorage.getItem("knowledgeData"));
         // JSON.parse(localStorage.getItem("knowledgeData"));
         this.dataList = JSON.parse(localStorage.getItem("knowledgeData"));
@@ -41,8 +41,11 @@ let getData = new class {
     }
 
 
-    addData() {
-
+    addData(data) {
+        let initialData = this.dataList;
+        initialData.push(data);
+        localStorage.setItem("knowledgeData", JSON.stringify(initialData));
+        console.log(JSON.parse(localStorage.getItem("knowledgeData")));
     }
 
 
