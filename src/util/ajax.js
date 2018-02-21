@@ -1,10 +1,11 @@
-import {getData} from "../data/dao.js";
+import {operateData} from "../data/dao.js";
 
 //url与调用方法的映射关系
 let mapping = new Map([
-    ["/getData/dataList", getData.getDataList],
-    ["/getData/id", getData.getKnowledgeById],
-    ["/getData/search", getData.searchKnowledge]
+    ["/operateData/dataList", operateData.getDataList],
+    ["/operateData/id", operateData.getKnowledgeById],
+    ["/operateData/search", operateData.searchKnowledge],
+    ["/operateData/add", operateData.addData]
 ]);
 
 let ajax = new class {
@@ -14,7 +15,7 @@ let ajax = new class {
 
   request(option) {
       return new Promise(((resolve) => {
-          resolve(this.mapping.get(option.url).call(getData, option.args));
+          resolve(this.mapping.get(option.url).call(operateData, option.args));
       }))
   }
 

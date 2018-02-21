@@ -1,6 +1,6 @@
 import {knowledgeData} from "./konwledgeData.js";
 
-let getData = new class {
+let operateData = new class {
     constructor() {
         // console.log(localStorage.getItem("knowledgeData"));
         // JSON.parse(localStorage.getItem("knowledgeData"));
@@ -40,7 +40,7 @@ let getData = new class {
         return matching;
     }
 
-
+    //添加knowledge，格式为对象{key: value}
     addData(data) {
         let initialData = this.dataList;
         initialData.push(data);
@@ -53,4 +53,4 @@ let getData = new class {
     
 }(knowledgeData());
 
-export {getData};
+export {operateData};
