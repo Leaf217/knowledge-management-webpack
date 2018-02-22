@@ -60,7 +60,7 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 0);
+/******/ 	return __webpack_require__(__webpack_require__.s = 1);
 /******/ })
 /************************************************************************/
 /******/ ([
@@ -70,7 +70,53 @@
 "use strict";
 
 
-var _singleton = __webpack_require__(1);
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.ajax = void 0;
+
+var _dao = __webpack_require__(3);
+
+function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
+
+function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
+
+function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
+
+//url与调用方法的映射关系
+var mapping = new Map([["/operateData/dataList", _dao.operateData.getDataList], ["/operateData/id", _dao.operateData.getKnowledgeById], ["/operateData/search", _dao.operateData.searchKnowledge], ["/operateData/add", _dao.operateData.addData]]);
+var ajax = new (
+/*#__PURE__*/
+function () {
+  function _class(mapping) {
+    _classCallCheck(this, _class);
+
+    this.mapping = mapping;
+  }
+
+  _createClass(_class, [{
+    key: "request",
+    value: function request(option) {
+      var _this = this;
+
+      return new Promise(function (resolve) {
+        resolve(_this.mapping.get(option.url).call(_dao.operateData, option.args));
+      });
+    }
+  }]);
+
+  return _class;
+}())(mapping);
+exports.ajax = ajax;
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _singleton = __webpack_require__(2);
 
 var _renderList = __webpack_require__(5);
 
@@ -78,7 +124,7 @@ var _renderHeader = __webpack_require__(9);
 
 var _renderFooter = __webpack_require__(12);
 
-var _dao = __webpack_require__(3);
+var _ajax = __webpack_require__(0);
 
 var list = {};
 (0, _singleton.getDataList)(list).then(function (contents) {
@@ -93,9 +139,27 @@ var list = {};
   (0, _renderFooter.renderFooter)(); //渲染添加按钮
 }, function (err) {
   console.error(err);
-});
+}); // getData.addData({
+//     "id": 0,
+//     "title": "关------",
+//     "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+//     "progress": 100,
+//     "evaluation": 3,
+//     "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+//     "tags": ['Tag1', 'Tag2', 'Tag3']
+// });
 
-_dao.getData.addData({
+function addData(data) {
+  return _ajax.ajax.request({
+    url: '/operateData/add'
+  }).then(function (contents) {
+    list.dataList = contents; // console.log(contents);
+  }, function (err) {
+    console.error(err);
+  });
+}
+
+addData({
   "id": 0,
   "title": "关------",
   "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
@@ -104,9 +168,10 @@ _dao.getData.addData({
   "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
   "tags": ['Tag1', 'Tag2', 'Tag3']
 });
+console.log(list);
 
 /***/ }),
-/* 1 */
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -118,7 +183,7 @@ Object.defineProperty(exports, "__esModule", {
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
 
-var _ajax = __webpack_require__(2);
+var _ajax = __webpack_require__(0);
 
 //写的比较全
 //获取整个知识列表
@@ -145,52 +210,6 @@ function getSearchList(query, list) {
 }
 
 /***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.ajax = void 0;
-
-var _dao = __webpack_require__(3);
-
-function _classCallCheck(instance, Constructor) { if (!(instance instanceof Constructor)) { throw new TypeError("Cannot call a class as a function"); } }
-
-function _defineProperties(target, props) { for (var i = 0; i < props.length; i++) { var descriptor = props[i]; descriptor.enumerable = descriptor.enumerable || false; descriptor.configurable = true; if ("value" in descriptor) descriptor.writable = true; Object.defineProperty(target, descriptor.key, descriptor); } }
-
-function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
-
-//url与调用方法的映射关系
-var mapping = new Map([["/getData/dataList", _dao.getData.getDataList], ["/getData/id", _dao.getData.getKnowledgeById], ["/getData/search", _dao.getData.searchKnowledge]]);
-var ajax = new (
-/*#__PURE__*/
-function () {
-  function _class(mapping) {
-    _classCallCheck(this, _class);
-
-    this.mapping = mapping;
-  }
-
-  _createClass(_class, [{
-    key: "request",
-    value: function request(option) {
-      var _this = this;
-
-      return new Promise(function (resolve) {
-        resolve(_this.mapping.get(option.url).call(_dao.getData, option.args));
-      });
-    }
-  }]);
-
-  return _class;
-}())(mapping);
-exports.ajax = ajax;
-
-/***/ }),
 /* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
@@ -200,7 +219,7 @@ exports.ajax = ajax;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.getData = void 0;
+exports.operateData = void 0;
 
 var _konwledgeData = __webpack_require__(4);
 
@@ -210,7 +229,7 @@ function _defineProperties(target, props) { for (var i = 0; i < props.length; i+
 
 function _createClass(Constructor, protoProps, staticProps) { if (protoProps) _defineProperties(Constructor.prototype, protoProps); if (staticProps) _defineProperties(Constructor, staticProps); return Constructor; }
 
-var getData = new (
+var operateData = new (
 /*#__PURE__*/
 function () {
   function _class() {
@@ -299,20 +318,20 @@ function () {
       }
 
       return matching;
-    }
+    } //添加knowledge，格式为对象{key: value}
+
   }, {
     key: "addData",
     value: function addData(data) {
       var initialData = this.dataList;
       initialData.push(data);
-      localStorage.setItem("knowledgeData", JSON.stringify(initialData));
-      console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+      localStorage.setItem("knowledgeData", JSON.stringify(initialData)); // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
     }
   }]);
 
   return _class;
 }())((0, _konwledgeData.knowledgeData)());
-exports.getData = getData;
+exports.operateData = operateData;
 
 /***/ }),
 /* 4 */
