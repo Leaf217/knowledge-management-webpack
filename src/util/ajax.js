@@ -5,7 +5,7 @@ let mapping = new Map([
     ["/operateData/dataList", operateData.getDataList],
     ["/operateData/id", operateData.getKnowledgeById],
     ["/operateData/search", operateData.searchKnowledge],
-    ["/operateData/add", operateData.addData]
+    // ["/operateData/add", operateData.addData]
 ]);
 
 let ajax = new class {
