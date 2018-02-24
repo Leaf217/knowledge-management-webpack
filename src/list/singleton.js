@@ -22,7 +22,3 @@ export function getSearchList(query, list) {
             console.error(err);
         });
 }
-
-
-
-//
