@@ -45,7 +45,7 @@ let operateData = new class {
         let initialData = this.dataList;
         initialData.push(data);
         localStorage.setItem("knowledgeData", JSON.stringify(initialData));
-        console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+        // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
     }
 
 
