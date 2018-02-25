@@ -218,37 +218,17 @@ var list = {};
   (0, _renderFooter.renderFooter)(); //渲染添加按钮
 }, function (err) {
   console.error(err);
-}); // operateData.addData({
-//     "id": 0,
-//     "title": "关------",
-//     "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
-//     "progress": 100,
-//     "evaluation": 3,
-//     "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
-//     "tags": ['Tag1', 'Tag2', 'Tag3']
-// });
-// function addData(data) {
-//     return ajax.request({url: '/operateData/add'})
-//         .then(function (contents) {
-//             list.dataList = contents;
-//             // console.log(contents);
-//         }, function (err) {
-//             console.error(err);
-//         });
-// }
-//
-// addData(
-//     {
-//     "id": 0,
-//     "title": "关------",
-//     "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
-//     "progress": 100,
-//     "evaluation": 3,
-//     "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
-//     "tags": ['Tag1', 'Tag2', 'Tag3']
-// }
-// );
-// console.log(list);
+});
+
+_dao.operateData.addData({
+  "id": 0,
+  "title": "关------",
+  "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+  "progress": 100,
+  "evaluation": 3,
+  "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+  "tags": ['Tag1', 'Tag2', 'Tag3']
+});
 
 /***/ }),
 /* 2 */
@@ -269,7 +249,7 @@ var _ajax = __webpack_require__(3);
 //获取整个知识列表
 function getDataList(list) {
   return _ajax.ajax.request({
-    url: '/getData/dataList'
+    url: '/operateData/dataList'
   }).then(function (contents) {
     list.dataList = contents; // console.log(contents);
   }, function (err) {
@@ -280,14 +260,14 @@ function getDataList(list) {
 
 function getSearchList(query, list) {
   return _ajax.ajax.request({
-    url: '/getData/search',
+    url: '/operateData/search',
     args: query
   }).then(function (contents) {
     list.searchList = contents;
   }, function (err) {
     console.error(err);
   });
-} //
+}
 
 /***/ }),
 /* 3 */
