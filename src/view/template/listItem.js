@@ -3,8 +3,6 @@ import trash from "../../images/Trash.png";
 
 
 export function generateListItem(knowledge) {
-    let title = knowledge.title;
-    console.log(knowledge.title);
 
     //knowledgeData使用Map时，用get得到属性值(下边定义的函数同理)
     // return `<li class="item">
@@ -32,9 +30,9 @@ export function generateListItem(knowledge) {
     //         </li>`;
 
 
-    //knowledgeData不使用Map时，用[]得到属性值(下边定义的函数同理)
+    //knowledgeData不使用Map时，用.得到属性值(下边定义的函数同理)
     return `<li class="item">
-                <h3><a href="" class="tit-url">${title}</a></h3>
+                <h3><a href="" class="tit-url">${knowledge.title}</a></h3>
                 <dl>
                     <dt>学习进度</dt>
                     <dd>

@@ -124,31 +124,8 @@ var _renderHeader = __webpack_require__(9);
 
 var _renderFooter = __webpack_require__(12);
 
-var _ajax = __webpack_require__(0);
-
-// import {operateData} from "./data/dao.js";
-// operateData.addData({
-//     "id": 0,
-//     "title": "关------",
-//     "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
-//     "progress": 100,
-//     "evaluation": 3,
-//     "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
-//     "tags": ['Tag1', 'Tag2', 'Tag3']
-// });
 var list = {};
-
-function addData(data) {
-  return _ajax.ajax.request({
-    url: '/operateData/add'
-  }).then(function (contents) {
-    list.dataList = contents; // console.log(contents);
-  }, function (err) {
-    console.error(err);
-  });
-}
-
-addData({
+(0, _singleton.addData)({
   "id": 0,
   "title": "关",
   "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
@@ -156,20 +133,19 @@ addData({
   "evaluation": 3,
   "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
   "tags": ['Tag1', 'Tag2', 'Tag3']
-}).then(function () {
-  (0, _singleton.getDataList)(list).then(function (contents) {
-    (0, _renderHeader.renderHeader)(); //渲染header
-  }, function (err) {
-    console.error(err);
-  }).then(function (contents) {
-    (0, _renderList.renderList)(list.dataList); //渲染列表
-  }, function (err) {
-    console.error(err);
-  }).then(function (contents) {
-    (0, _renderFooter.renderFooter)(); //渲染添加按钮
-  }, function (err) {
-    console.error(err);
-  });
+}, list);
+(0, _singleton.getDataList)(list).then(function (contents) {
+  (0, _renderHeader.renderHeader)(); //渲染header
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _renderList.renderList)(list.dataList); //渲染列表
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _renderFooter.renderFooter)(); //渲染添加按钮
+}, function (err) {
+  console.error(err);
 });
 
 /***/ }),
@@ -184,6 +160,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.getDataList = getDataList;
 exports.getSearchList = getSearchList;
+exports.addData = addData;
 
 var _ajax = __webpack_require__(0);
 
@@ -206,6 +183,18 @@ function getSearchList(query, list) {
     args: query
   }).then(function (contents) {
     list.searchList = contents;
+  }, function (err) {
+    console.error(err);
+  });
+} //添加knowledge
+
+
+function addData(data, list) {
+  return _ajax.ajax.request({
+    url: '/operateData/add',
+    args: data
+  }).then(function (contents) {
+    list.dataList = contents; // console.log(contents);
   }, function (err) {
     console.error(err);
   });
@@ -327,7 +316,8 @@ function () {
     value: function addData(data) {
       var initialData = this.dataList;
       initialData.push(data);
-      localStorage.setItem("knowledgeData", JSON.stringify(initialData)); // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
+      localStorage.setItem("knowledgeData", JSON.stringify(initialData));
+      return JSON.parse(localStorage.getItem("knowledgeData")); // console.log(JSON.parse(localStorage.getItem("knowledgeData")));
     }
   }]);
 
@@ -472,8 +462,7 @@ var _Trash = _interopRequireDefault(__webpack_require__(8));
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function generateListItem(knowledge) {
-  var title = knowledge.title;
-  console.log(knowledge.title); //knowledgeData使用Map时，用get得到属性值(下边定义的函数同理)
+  //knowledgeData使用Map时，用get得到属性值(下边定义的函数同理)
   // return `<li class="item">
   //             <h3><a href="" class="tit-url">${knowledge.get("title")}</a></h3>
   //             <dl>
@@ -497,9 +486,8 @@ function generateListItem(knowledge) {
   //             </dl>
   //             <img src=${trash} alt="trash" class="trash">
   //         </li>`;
-  //knowledgeData不使用Map时，用[]得到属性值(下边定义的函数同理)
-
-  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(title, "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.progress, " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.notes, "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
+  //knowledgeData不使用Map时，用.得到属性值(下边定义的函数同理)
+  return "<li class=\"item\">\n                <h3><a href=\"\" class=\"tit-url\">".concat(knowledge.title, "</a></h3>\n                <dl>\n                    <dt>\u5B66\u4E60\u8FDB\u5EA6</dt>\n                    <dd>\n                        <span class=\"progress-bar\"></span>\n                        <span>").concat(knowledge.progress, " %</span>\n                    </dd>\n                    \n                    <dt>\u77E5\u8BC6\u8BC4\u4EF7</dt>\n                    <dd>").concat(generateStars(knowledge), "</dd>\n                    \n                    <dt>\u5B66\u4E60\u7B14\u8BB0</dt>\n                    <dd>\n                        <p class=\"notes-con\">").concat(knowledge.notes, "</p>\n                        <a href=\"#\" class=\"view-more\">view more</a>\n                    </dd>\n                    \n                    <dt>\u6807\u7B7E</dt>\n                    <dd>").concat(generateTags(knowledge), "</dd>\n                </dl>\n                <img src=").concat(_Trash.default, " alt=\"trash\" class=\"trash\">\n            </li>");
 }
 
 function generateStars(knowledge) {

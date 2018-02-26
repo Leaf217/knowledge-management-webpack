@@ -22,3 +22,14 @@ export function getSearchList(query, list) {
             console.error(err);
         });
 }
+
+//添加knowledge
+export function addData(data, list) {
+    return ajax.request({url: '/operateData/add', args: data})
+        .then(function (contents) {
+            list.dataList = contents;
+            // console.log(contents);
+        }, function (err) {
+            console.error(err);
+        });
+}
