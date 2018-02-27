@@ -16,3 +16,5 @@
 #### singleton.js---对操作数据的结果进行处理
 - 调用ajax.js中的ajax语句请求或者操作数据，并将得到的数据存入list对象中，便于后续的操作
 
+#### listItem.js---主页上一条knowledge的模板
+- 用于渲染主页中的knowledge标签
