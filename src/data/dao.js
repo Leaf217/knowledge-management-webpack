@@ -12,7 +12,7 @@ let operateData = new class {
         return this.dataList;
     }
 
-    //通过id获取某个knowledge
+    //通过id获取某个knowledge，后续没有写
     getKnowledgeById(id) {
         // for (let i = 0; i < this.dataList.length;i++) {
         //     if (this.dataList[i].get("id") === id) {

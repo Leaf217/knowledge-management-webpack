@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="991eb40c-e770-49b9-9d8c-a87f507689de" name="Default" comment="">
-      <change beforePath="$PROJECT_DIR$/Readme.md" afterPath="$PROJECT_DIR$/Readme.md" />
+      <change beforePath="$PROJECT_DIR$/src/data/dao.js" afterPath="$PROJECT_DIR$/src/data/dao.js" />
       <change beforePath="$PROJECT_DIR$/src/list/singleton.js" afterPath="$PROJECT_DIR$/src/list/singleton.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
@@ -30,8 +30,8 @@
       <file leaf-file-name="singleton.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/list/singleton.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="225">
-              <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
+            <state relative-caret-position="375">
+              <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -73,17 +73,17 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="dao.js" pinned="false" current-in-tab="false">
+      <file leaf-file-name="dao.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/data/dao.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="705">
-              <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
+            <state relative-caret-position="210">
+              <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
               <folding />
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="Readme.md" pinned="false" current-in-tab="true">
+      <file leaf-file-name="Readme.md" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/Readme.md">
           <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
             <state split_layout="SPLIT">
@@ -167,11 +167,11 @@
         <option value="$PROJECT_DIR$/src/data/konwledgeData.js" />
         <option value="$PROJECT_DIR$/src/view/renderList.js" />
         <option value="$PROJECT_DIR$/src/util/ajax.js" />
-        <option value="$PROJECT_DIR$/src/data/dao.js" />
         <option value="$PROJECT_DIR$/src/main.js" />
         <option value="$PROJECT_DIR$/src/view/template/listItem.js" />
-        <option value="$PROJECT_DIR$/src/list/singleton.js" />
         <option value="$PROJECT_DIR$/Readme.md" />
+        <option value="$PROJECT_DIR$/src/list/singleton.js" />
+        <option value="$PROJECT_DIR$/src/data/dao.js" />
       </list>
     </option>
   </component>
@@ -260,7 +260,6 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
-      <pane id="Scratches" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -277,6 +276,7 @@
           <select />
         </subPane>
       </pane>
+      <pane id="Scratches" />
       <pane id="Scope" />
     </panes>
   </component>
@@ -370,11 +370,12 @@
       <workItem from="1519746642803" duration="316000" />
       <workItem from="1519785262845" duration="12000" />
       <workItem from="1519889498942" duration="1056000" />
+      <workItem from="1519890747407" duration="165000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="203927000" />
+    <option name="totallyTimeSpent" value="204092000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="23" width="1280" height="699" extended-state="6" />
@@ -676,22 +677,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/util/ajax.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="270">
-          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/data/dao.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="705">
-          <caret line="47" column="65" lean-forward="false" selection-start-line="47" selection-start-column="65" selection-end-line="47" selection-end-column="65" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="45">
@@ -714,11 +699,14 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/list/singleton.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="225">
-          <caret line="15" column="26" lean-forward="false" selection-start-line="15" selection-start-column="26" selection-end-line="15" selection-end-column="26" />
-          <folding />
+    <entry file="file://$PROJECT_DIR$/Readme.md">
+      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
+        <state split_layout="SPLIT">
+          <first_editor relative-caret-position="225">
+            <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
+            <folding />
+          </first_editor>
+          <second_editor />
         </state>
       </provider>
     </entry>
@@ -730,14 +718,27 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/Readme.md">
-      <provider selected="true" editor-type-id="split-provider[text-editor;markdown-preview-editor]">
-        <state split_layout="SPLIT">
-          <first_editor relative-caret-position="225">
-            <caret line="15" column="0" lean-forward="true" selection-start-line="15" selection-start-column="0" selection-end-line="15" selection-end-column="0" />
-            <folding />
-          </first_editor>
-          <second_editor />
+    <entry file="file://$PROJECT_DIR$/src/util/ajax.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="270">
+          <caret line="18" column="9" lean-forward="false" selection-start-line="18" selection-start-column="9" selection-end-line="18" selection-end-column="9" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/list/singleton.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="375">
+          <caret line="25" column="0" lean-forward="true" selection-start-line="25" selection-start-column="0" selection-end-line="25" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/data/dao.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="210">
+          <caret line="14" column="29" lean-forward="false" selection-start-line="14" selection-start-column="29" selection-end-line="14" selection-end-column="29" />
+          <folding />
         </state>
       </provider>
     </entry>

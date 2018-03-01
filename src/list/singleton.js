@@ -23,6 +23,7 @@ export function getSearchList(query, list) {
         });
 }
 
+
 //添加knowledge
 export function addData(data, list) {
     return ajax.request({url: '/operateData/add', args: data})
