@@ -2,7 +2,7 @@
 import {ajax} from "../util/ajax.js";
 
 
-//获取整个知识列表
+//获取整个knowledge列表
 export function getDataList(list) {
     return ajax.request({url: '/operateData/dataList'})
         .then(function (contents) {
@@ -13,7 +13,7 @@ export function getDataList(list) {
         });
 }
 
-//通过title或者tags进行知识查询
+//通过title或者tags进行knowledge查询
 export function getSearchList(query, list) {
     return ajax.request({url: '/operateData/search', args: query})
         .then(function (contents) {
