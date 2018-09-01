@@ -60,11 +60,102 @@
 /******/ 	__webpack_require__.p = "";
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 1);
+/******/ 	return __webpack_require__(__webpack_require__.s = 0);
 /******/ })
 /************************************************************************/
 /******/ ([
 /* 0 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+var _singleton = __webpack_require__(1);
+
+var _renderList = __webpack_require__(5);
+
+var _renderHeader = __webpack_require__(9);
+
+var _renderFooter = __webpack_require__(12);
+
+var list = {};
+(0, _singleton.addData)({
+  "id": 0,
+  "title": "关",
+  "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
+  "progress": 100,
+  "evaluation": 3,
+  "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
+  "tags": ['Tag1', 'Tag2', 'Tag3']
+}, list);
+(0, _singleton.getDataList)(list).then(function (contents) {
+  (0, _renderHeader.renderHeader)(); //渲染header
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _renderList.renderList)(list.dataList); //渲染列表
+}, function (err) {
+  console.error(err);
+}).then(function (contents) {
+  (0, _renderFooter.renderFooter)(); //渲染添加按钮
+}, function (err) {
+  console.error(err);
+});
+
+/***/ }),
+/* 1 */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.getDataList = getDataList;
+exports.getSearchList = getSearchList;
+exports.addData = addData;
+
+var _ajax = __webpack_require__(2);
+
+//写的比较全
+//获取整个knowledge列表
+function getDataList(list) {
+  return _ajax.ajax.request({
+    url: '/operateData/dataList'
+  }).then(function (contents) {
+    list.dataList = contents; // console.log(contents);
+  }, function (err) {
+    console.error(err);
+  });
+} //通过title或者tags进行knowledge查询
+
+
+function getSearchList(query, list) {
+  return _ajax.ajax.request({
+    url: '/operateData/search',
+    args: query
+  }).then(function (contents) {
+    list.searchList = contents;
+  }, function (err) {
+    console.error(err);
+  });
+} //添加knowledge
+
+
+function addData(data, list) {
+  return _ajax.ajax.request({
+    url: '/operateData/add',
+    args: data
+  }).then(function (contents) {
+    list.dataList = contents; // console.log(contents);
+  }, function (err) {
+    console.error(err);
+  });
+}
+
+/***/ }),
+/* 2 */
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
@@ -99,7 +190,7 @@ function () {
     value: function request(option) {
       var _this = this;
 
-      return new Promise(function (resolve) {
+      return new Promise(function (resolve, reject) {
         resolve(_this.mapping.get(option.url).call(_dao.operateData, option.args));
       });
     }
@@ -108,97 +199,6 @@ function () {
   return _class;
 }())(mapping);
 exports.ajax = ajax;
-
-/***/ }),
-/* 1 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-var _singleton = __webpack_require__(2);
-
-var _renderList = __webpack_require__(5);
-
-var _renderHeader = __webpack_require__(9);
-
-var _renderFooter = __webpack_require__(12);
-
-var list = {};
-(0, _singleton.addData)({
-  "id": 0,
-  "title": "关",
-  "URL": "http://www.w3school.com.cn/cssref/pr_class_float.asp",
-  "progress": 100,
-  "evaluation": 3,
-  "notes": "关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿关于float的那些事儿",
-  "tags": ['Tag1', 'Tag2', 'Tag3']
-}, list);
-(0, _singleton.getDataList)(list).then(function (contents) {
-  (0, _renderHeader.renderHeader)(); //渲染header
-}, function (err) {
-  console.error(err);
-}).then(function (contents) {
-  (0, _renderList.renderList)(list.dataList); //渲染列表
-}, function (err) {
-  console.error(err);
-}).then(function (contents) {
-  (0, _renderFooter.renderFooter)(); //渲染添加按钮
-}, function (err) {
-  console.error(err);
-});
-
-/***/ }),
-/* 2 */
-/***/ (function(module, exports, __webpack_require__) {
-
-"use strict";
-
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.getDataList = getDataList;
-exports.getSearchList = getSearchList;
-exports.addData = addData;
-
-var _ajax = __webpack_require__(0);
-
-//写的比较全
-//获取整个知识列表
-function getDataList(list) {
-  return _ajax.ajax.request({
-    url: '/operateData/dataList'
-  }).then(function (contents) {
-    list.dataList = contents; // console.log(contents);
-  }, function (err) {
-    console.error(err);
-  });
-} //通过title或者tags进行知识查询
-
-
-function getSearchList(query, list) {
-  return _ajax.ajax.request({
-    url: '/operateData/search',
-    args: query
-  }).then(function (contents) {
-    list.searchList = contents;
-  }, function (err) {
-    console.error(err);
-  });
-} //添加knowledge
-
-
-function addData(data, list) {
-  return _ajax.ajax.request({
-    url: '/operateData/add',
-    args: data
-  }).then(function (contents) {
-    list.dataList = contents; // console.log(contents);
-  }, function (err) {
-    console.error(err);
-  });
-}
 
 /***/ }),
 /* 3 */
@@ -236,7 +236,7 @@ function () {
     key: "getDataList",
     value: function getDataList() {
       return this.dataList;
-    } //通过id获取某个knowledge
+    } //通过id获取某个knowledge，后续没有写
 
   }, {
     key: "getKnowledgeById",

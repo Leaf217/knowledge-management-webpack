@@ -14,9 +14,9 @@ let ajax = new class {
   }
 
   request(option) {
-      return new Promise(((resolve) => {
+      return new Promise((resolve, reject) => {
           resolve(this.mapping.get(option.url).call(operateData, option.args));
-      }))
+      })
   }
 
 }(mapping);
